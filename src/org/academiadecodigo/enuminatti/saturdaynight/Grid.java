@@ -9,6 +9,8 @@ public class Grid {
 
     public static final int PADDING = 10;
     public static final int CELLSIZE = 15;
+    public static int HEIGHT; //rows * celsize
+    public static int WIDTH; //cols * celsize
 
 
     private int cols ;
@@ -21,8 +23,11 @@ public class Grid {
         this.rows = rows;
         this.gameGrid = new Rectangle(PADDING,PADDING, cols * CELLSIZE,rows * CELLSIZE);
         gameGrid.draw();
+        HEIGHT = cols*CELLSIZE;
+        WIDTH = rows*CELLSIZE;
 
     }
+
 
 
     public int getRows() {

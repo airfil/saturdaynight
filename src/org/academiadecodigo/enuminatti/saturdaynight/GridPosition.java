@@ -24,6 +24,7 @@ public class GridPosition {
         currentDirection = Direction.NODIRECTION;
 
     }
+
     // Creating constructor for generating a random position for the various Objects
     public GridPosition(Grid gameGrid) {
 
@@ -44,8 +45,6 @@ public class GridPosition {
     }
 
 
-
-
     public int getRow() {
         return row;
     }
@@ -53,6 +52,39 @@ public class GridPosition {
     public int getCol() {
 
         return col;
+    }
+
+    public void moveDown() {
+        if (Grid.WIDTH >= gameGrid.rowToY(getRow())) {
+            currentDirection = Direction.UP;
+            return;
+        }
+        currentDirection = Direction.DOWN;
+
+    }
+
+    public void moveUp() {
+        if (Grid.WIDTH < gameGrid.rowToY(getRow())) {
+            currentDirection = Direction.DOWN;
+            return;
+        }
+        currentDirection = Direction.UP;
+    }
+
+    public void moveLeft() {
+        if (Grid.HEIGHT < gameGrid.colToX(getCol())) {
+            currentDirection = Direction.RIGTH;
+            return;
+        }
+        currentDirection = Direction.LEFT;
+    }
+
+    public void moveRight() {
+        if (Grid.HEIGHT >= gameGrid.colToX(getCol())) {
+            currentDirection = Direction.LEFT;
+            return;
+        }
+        currentDirection = Direction.RIGTH;
     }
 
     //Method to get a random direction in witch the NPC will move
