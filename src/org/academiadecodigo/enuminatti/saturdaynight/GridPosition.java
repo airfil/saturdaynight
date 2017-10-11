@@ -57,12 +57,12 @@ public class GridPosition {
         //Generating random col and row
 
         this.col = (int) Math.ceil(Math.random() * gameGrid.getCols()-2);
-        System.out.println(col);
+
 
         // Generating a y with range , for the first item to appear on the upside of the screen
         int range = (maxy - miny) + 1;
         this.row = (int) Math.ceil(Math.random() * range) + miny;
-        System.out.println(row);
+
 
 
         //The gameGrid of this position
@@ -92,7 +92,7 @@ public class GridPosition {
 
         if (row - 1 < 0) {
 
-            currentDirection = Direction.DOWN;
+            currentDirection = Direction.NODIRECTION;
             return;
         }
 
@@ -102,9 +102,9 @@ public class GridPosition {
 
     public void moveDown() {
 
-        if (row + 1 > gameGrid.getRows() - 2) {
+        if (row > gameGrid.getRows() - 2) {
 
-            currentDirection = Direction.UP;
+            currentDirection = Direction.NODIRECTION;
             return;
         }
         row += 1;
@@ -115,7 +115,7 @@ public class GridPosition {
 
         if (col + 1 > gameGrid.getCols() - 1) {
 
-            currentDirection = Direction.LEFT;
+            currentDirection = Direction.NODIRECTION;
             return;
         }
         col += 1;
@@ -124,8 +124,8 @@ public class GridPosition {
 
     public void moveLeft() {
 
-        if (col - 1 < 1) {
-            currentDirection = Direction.RIGTH;
+        if (col < 1) {
+            currentDirection = Direction.NODIRECTION;
             return;
         }
         col -= 1;

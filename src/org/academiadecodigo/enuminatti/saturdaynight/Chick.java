@@ -64,8 +64,6 @@ public class Chick  {
     public void accelarete() {
 
 
-
-
         switch (chickPosition.getCurrentDirection()) {
 
             case UP:

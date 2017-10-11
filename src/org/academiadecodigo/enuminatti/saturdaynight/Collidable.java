@@ -5,13 +5,12 @@ package org.academiadecodigo.enuminatti.saturdaynight;
  */
 public interface Collidable {
 
-    public boolean coolided =false;
 
 
     public abstract void whenCollisionHappens();
 
 
 
-    abstract public void CrashCheck(Collidable myCollideble);
+
 
 }

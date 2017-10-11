@@ -31,4 +31,12 @@ public class Item {
     public void setItemGrid(Grid itemGrid) {
         this.itemGrid = itemGrid;
     }
+
+    public GridPosition getItemPosition() {
+        return itemPosition;
+    }
+
+    public Rectangle getItemRectangle() {
+        return itemRectangle;
+    }
 }
