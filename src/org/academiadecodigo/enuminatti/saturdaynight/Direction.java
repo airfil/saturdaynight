@@ -7,8 +7,8 @@ public enum Direction {
 
     RIGTH(1,0),
     LEFT(-1,0),
-    UP(0,1),
-    DOWN(0,-1),
+    UP(0,-1),
+    DOWN(0,1),
     NODIRECTION(0,0);
 
     int col;
