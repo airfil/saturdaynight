@@ -24,7 +24,7 @@ public class Chick implements Collidable {
         chickRectangle.setColor(Color.PINK);
         chickRectangle.fill();
         chickPosition.setCurrentDirection(Direction.RIGTH);
-        //chickRectangle.draw();
+
     }
 
 
