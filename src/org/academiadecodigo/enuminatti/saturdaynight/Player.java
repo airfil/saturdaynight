@@ -10,66 +10,61 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
  */
 public class Player implements KeyboardHandler {
 
-    private KeyboardEvent eventUp;
-    private KeyboardEvent eventDown;
-    private KeyboardEvent eventLeft;
-    private KeyboardEvent eventRight;
+    Keyboard playerKeyboard;
+    KeyboardEvent[] events;
+    GridPosition pos;
 
-    public Player(int number) {
 
-        //Player 1
-        if (number == 1) {
-            Keyboard player = new Keyboard(this);
 
-            eventUp = new KeyboardEvent();
-            eventUp.setKey(KeyboardEvent.KEY_UP);
-            eventUp.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-            player.addEventListener(eventUp);
 
-            eventDown = new KeyboardEvent();
-            eventDown.setKey(KeyboardEvent.KEY_DOWN);
-            eventDown.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-            player.addEventListener(eventDown);
+    public Player(GridPosition pos,int number) {
 
-            eventLeft = new KeyboardEvent();
-            eventLeft.setKey(KeyboardEvent.KEY_LEFT);
-            eventLeft.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-            player.addEventListener(eventLeft);
-
-            eventRight = new KeyboardEvent();
-            eventRight.setKey(KeyboardEvent.KEY_RIGHT);
-            eventRight.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-            player.addEventListener(eventRight);
+        if(number == 1){
+            playerOneEvents();
         }
-
-        //Player 2
-        if (number == 2) {
-
-            Keyboard player = new Keyboard(this);
-
-            eventUp = new KeyboardEvent();
-            eventUp.setKey(KeyboardEvent.KEY_W);
-            eventUp.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-            player.addEventListener(eventUp);
-
-            eventDown = new KeyboardEvent();
-            eventDown.setKey(KeyboardEvent.KEY_S);
-            eventDown.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-            player.addEventListener(eventDown);
-
-            eventLeft = new KeyboardEvent();
-            eventLeft.setKey(KeyboardEvent.KEY_A);
-            eventLeft.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-            player.addEventListener(eventLeft);
-
-            eventRight = new KeyboardEvent();
-            eventRight.setKey(KeyboardEvent.KEY_D);
-            eventRight.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-            player.addEventListener(eventRight);
+        if(number == 2){
+            playerTwoEvents();
         }
-
 
     }
+
+
+
+    //Player One
+    public KeyboardEvent[] playerOneEvents () {
+        int[] keys = {KeyboardEvent.KEY_LEFT, KeyboardEvent.KEY_RIGHT, KeyboardEvent.KEY_DOWN, KeyboardEvent.KEY_UP};
+
+        KeyboardEvent[] pOneKeyboardEvents = new KeyboardEvent[keys.length];
+        keyboardEvents(playerOneEvents(), keys);
+
+
+        return pOneKeyboardEvents;
+    }
+
+    //Player Two
+    public KeyboardEvent[] playerTwoEvents () {
+        int[] keys ={KeyboardEvent.KEY_A, KeyboardEvent.KEY_D, KeyboardEvent.KEY_S, KeyboardEvent.KEY_W};
+
+        KeyboardEvent[] pTwoKeyboardsEvents = new KeyboardEvent[keys.length];
+        keyboardEvents(playerTwoEvents(), keys);
+
+
+        return pTwoKeyboardsEvents;
+    }
+
+
+    private  void keyboardEvents(KeyboardEvent[] keyboard,int keys[]){
+        for (int i = 0; i < keyboard.length; i++) {
+
+            keyboard[i] = new KeyboardEvent();
+            keyboard[i].setKey(keys[i]);
+            keyboard[i].setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+            playerKeyboard.addEventListener(keyboard[i]);
+
+        }
+    }
+
+
 
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
