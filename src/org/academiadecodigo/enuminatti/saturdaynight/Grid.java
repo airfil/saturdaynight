@@ -23,8 +23,8 @@ public class Grid {
         this.rows = rows;
         this.gameGrid = new Rectangle(PADDING,PADDING, cols * CELLSIZE,rows * CELLSIZE);
         gameGrid.draw();
-        HEIGHT = cols*CELLSIZE;
-        WIDTH = rows*CELLSIZE;
+        HEIGHT = cols*CELLSIZE+PADDING;
+        WIDTH = rows*CELLSIZE+PADDING;
 
     }
 

@@ -16,34 +16,45 @@ public class GridPosition {
         //The gameGrid of this position
         this.gameGrid = gameGrid;
 
-        //Turning Col and Row into  pixeis (x,y)
-        this.col = gameGrid.colToX(col);
-        this.row = gameGrid.rowToY(row);
+        this.col = col;
+
+        this.row = row;
 
         //Initializing the current Direction to NODIRECTION
         currentDirection = Direction.NODIRECTION;
 
     }
+
+    public void setCurrentDirection(Direction currentDirection) {
+        this.currentDirection = currentDirection;
+    }
+
+    public Direction getCurrentDirection() {
+        return currentDirection;
+    }
+
 
     // Creating constructor for generating a random position for the various Objects
     public GridPosition(Grid gameGrid) {
 
         //Generating random col and row
-        this.col = (int) Math.random() * gameGrid.getCols();
-        this.row = (int) Math.random() * gameGrid.getRows();
+        this.col = (int) Math.ceil(Math.random() * gameGrid.getCols());
+
+        this.row = (int) Math.ceil(Math.random() * gameGrid.getRows());
+
 
         //The gameGrid of this position
         this.gameGrid = gameGrid;
 
-        //Turning Col and Row into  pixeis (x,y)
-        this.col = gameGrid.colToX(col);
-        this.row = gameGrid.rowToY(row);
 
         //Initializing the current Direction to NODIRECTION
         currentDirection = Direction.NODIRECTION;
 
     }
 
+    public Grid getGameGrid() {
+        return gameGrid;
+    }
 
     public int getRow() {
         return row;
@@ -54,44 +65,57 @@ public class GridPosition {
         return col;
     }
 
-    public void moveDown() {
-        if (Grid.WIDTH >= gameGrid.rowToY(getRow())) {
-            currentDirection = Direction.UP;
-            return;
-        }
-        currentDirection = Direction.DOWN;
-
-    }
 
     public void moveUp() {
-        if (Grid.WIDTH < gameGrid.rowToY(getRow())) {
+
+        if (row - 1 < 0) {
+
             currentDirection = Direction.DOWN;
             return;
         }
-        currentDirection = Direction.UP;
+
+        row -= 1;
+
     }
 
-    public void moveLeft() {
-        if (Grid.HEIGHT < gameGrid.colToX(getCol())) {
-            currentDirection = Direction.RIGTH;
+    public void moveDown() {
+
+        if (row + 1 > gameGrid.getRows() - 2) {
+
+            currentDirection = Direction.UP;
             return;
         }
-        currentDirection = Direction.LEFT;
+        row += 1;
+
     }
 
-    public void moveRight() {
-        if (Grid.HEIGHT >= gameGrid.colToX(getCol())) {
+    public void moveRigth() {
+
+        if (col + 1 > gameGrid.getCols() - 1) {
+
             currentDirection = Direction.LEFT;
             return;
         }
-        currentDirection = Direction.RIGTH;
+        col += 1;
+
     }
+
+    public void moveLeft() {
+
+        if (col - 1 < 1) {
+            currentDirection = Direction.RIGTH;
+            return;
+        }
+        col -= 1;
+
+    }
+
 
     //Method to get a random direction in witch the NPC will move
     public void createRandomDirection() {
 
         //Creating a random number to generate a new direction
-        int random = (int) Math.random() * Direction.values().length;
+        int random = (int) Math.floor(Math.random() * (Direction.values().length-1));
 
         Direction newDirection = Direction.values()[random];
 
