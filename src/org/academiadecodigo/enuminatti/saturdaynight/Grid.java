@@ -52,6 +52,12 @@ public class Grid {
         return  new GridPosition(col,row,this);
     }
 
+
+    // Grid position used for item randomize first time it appears in the screen
+    public GridPosition newGridPostion(){
+        return  new GridPosition(this,0,25);
+    }
+
     public GridPosition newGridPosition(Grid gameGrid){
         return  new GridPosition(this);
     }

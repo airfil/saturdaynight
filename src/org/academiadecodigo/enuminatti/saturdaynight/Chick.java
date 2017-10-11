@@ -6,7 +6,7 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 /**
  * Created by codecadet on 09/10/17.
  */
-public class Chick implements Collidable {
+public class Chick  {
 
     private GridPosition chickPosition;
     private Rectangle chickRectangle;
@@ -16,10 +16,11 @@ public class Chick implements Collidable {
     public Chick(GridPosition chickPosition) {
 
         this.chickPosition = chickPosition;
-        System.out.println("Chick initial row:" + chickPosition.getCol());
-        System.out.println("Chick initial col:" + chickPosition.getRow());
+
+
         int x = chickPosition.getGameGrid().colToX(chickPosition.getCol());
         int y = chickPosition.getGameGrid().rowToY(chickPosition.getRow());
+
         chickRectangle = new Rectangle(x, y, Grid.CELLSIZE, Grid.CELLSIZE);
         chickRectangle.setColor(Color.PINK);
         chickRectangle.fill();

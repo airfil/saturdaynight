@@ -38,9 +38,31 @@ public class GridPosition {
     public GridPosition(Grid gameGrid) {
 
         //Generating random col and row
-        this.col = (int) Math.ceil(Math.random() * gameGrid.getCols());
+        this.col = (int) Math.ceil(Math.random() * gameGrid.getCols()-2);
 
-        this.row = (int) Math.ceil(Math.random() * gameGrid.getRows());
+        this.row = (int) Math.ceil(Math.random() * gameGrid.getRows()-2);
+
+
+        //The gameGrid of this position
+        this.gameGrid = gameGrid;
+
+
+        //Initializing the current Direction to NODIRECTION
+        currentDirection = Direction.NODIRECTION;
+
+    }
+
+    public GridPosition(Grid gameGrid,int miny,int maxy) {
+
+        //Generating random col and row
+
+        this.col = (int) Math.ceil(Math.random() * gameGrid.getCols()-2);
+        System.out.println(col);
+
+        // Generating a y with range , for the first item to appear on the upside of the screen
+        int range = (maxy - miny) + 1;
+        this.row = (int) Math.ceil(Math.random() * range) + miny;
+        System.out.println(row);
 
 
         //The gameGrid of this position
