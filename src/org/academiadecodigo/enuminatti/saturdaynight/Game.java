@@ -14,6 +14,7 @@ public class Game {
     private Player player2;
     private Item item;
     private long delay = 200;
+    private Dancer dancer;
 
     public Game() {
 
@@ -30,6 +31,7 @@ public class Game {
         player1 = new Player(gameGrid.newGridPostion(25, 25), 1);
         player2 = new Player(gameGrid.newGridPostion(20, 20), 2);
 
+        dancer = new Dancer(gameGrid.newGridPostion(10, 10));
 
         item = new Item(gameGrid.newGridPostion(20, 25));
 
@@ -42,6 +44,7 @@ public class Game {
 
             mychick.move();
             player1.accelarete();
+            dancer.move();
             collision(player1, item);
             colision(player1, mychick);
             player2.accelarete();
