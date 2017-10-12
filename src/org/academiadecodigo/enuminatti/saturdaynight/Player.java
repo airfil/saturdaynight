@@ -57,11 +57,16 @@ public class Player implements KeyboardHandler {
         return pos;
     }
 
+    public int getItems() {
+        return items;
+    }
 
     public void whencolide(){
 
         items ++;
-
+    }
+    public void resetItems(){
+        items=0;
     }
 
     //Player One
@@ -167,7 +172,6 @@ public class Player implements KeyboardHandler {
         }
 
         if (keyboardEvent.getKey() == keyboardEvent.KEY_W){
-            System.out.println("W");
             pos.setCurrentDirection(Direction.UP);
         }
 

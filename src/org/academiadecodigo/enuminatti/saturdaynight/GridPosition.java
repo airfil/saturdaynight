@@ -55,8 +55,8 @@ public class GridPosition {
     public GridPosition(Grid gameGrid,int miny,int maxy) {
 
         //Generating random col and row
-
-        this.col = (int) Math.ceil(Math.random() * gameGrid.getCols()-2);
+        int rangex = (gameGrid.getCols()-1 - 2) + 1;
+        this.col = (int) Math.ceil(Math.random() * rangex) + 1;
 
 
         // Generating a y with range , for the first item to appear on the upside of the screen

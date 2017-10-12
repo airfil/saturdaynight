@@ -17,7 +17,6 @@ public class Game {
 
     public Game() {
 
-
         init();
     }
 
@@ -31,7 +30,6 @@ public class Game {
         player1 = new Player(gameGrid.newGridPostion(25, 25), 1);
         player2 = new Player(gameGrid.newGridPostion(20, 20), 2);
 
-        //item = new Item(gameGrid.newGridPostion());
 
         item = new Item(gameGrid.newGridPostion(20, 25));
 
@@ -45,9 +43,12 @@ public class Game {
             mychick.move();
             player1.accelarete();
             collision(player1, item);
+            colision(player1, mychick);
             player2.accelarete();
             collision(player2, item);
+            colision(player2, mychick);
             Thread.sleep(delay);
+
 
         }
     }
@@ -62,11 +63,26 @@ public class Game {
             players.whencolide();
             System.out.println(players.items);
 
-            item = null;
+
             this.item.getItemRectangle().delete();
             this.item = new Item(gameGrid.newGridPosition(gameGrid));
         }
 
+
+    }
+    public void colision(Player players, Chick chicks){
+        GridPosition chick = chicks.getChickPosition();
+        GridPosition player = players.getPos();
+
+        if(player.getCol() == chick.getCol() && player.getRow() == chick.getRow()) {
+
+
+            if(players.getItems() >=3){
+
+                System.out.println("Win");
+                players.resetItems();
+            }
+        }
 
     }
 
