@@ -5,41 +5,45 @@ package org.academiadecodigo.enuminatti.saturdaynight;
  */
 public enum Direction {
 
-    RIGTH(1,0),
-    LEFT(-1,0),
-    UP(0,-1),
-    DOWN(0,1),
-    NODIRECTION(0,0);
+    RIGTH(1, 0),
+    LEFT(-1, 0),
+    UP(0, -1),
+    DOWN(0, 1),
+    NODIRECTION(0, 0);
 
     int col;
     int row;
 
-    Direction(int col , int row){
+    Direction(int col, int row) {
 
-        this.col=col;
+        this.col = col;
         this.row = row;
     }
 
-    static public Direction oppositeDirection(Direction myDirection ){
+    static public Direction oppositeDirection(Direction myDirection) {
 
 
-        switch (myDirection){
+        switch (myDirection) {
 
-            case RIGTH:return Direction.LEFT;
+            case RIGTH:
+                return Direction.LEFT;
 
-            case UP: return Direction.DOWN;
+            case UP:
+                return Direction.DOWN;
 
-            case DOWN:return Direction.UP;
+            case DOWN:
+                return Direction.UP;
 
-            case LEFT:return Direction.RIGTH;
+            case LEFT:
+                return Direction.RIGTH;
 
-            default:return  Direction.NODIRECTION;
+            default:
+                return Direction.NODIRECTION;
 
         }
 
 
     }
-
 
 
 }

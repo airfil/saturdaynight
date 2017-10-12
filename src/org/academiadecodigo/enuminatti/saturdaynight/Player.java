@@ -12,7 +12,7 @@ import java.security.Key;
 /**
  * Created by codecadet on 09/10/17.
  */
-public class Player implements KeyboardHandler {
+public class Player implements KeyboardHandler, Collidable{
 
     Keyboard playerKeyboard;
     Keyboard playerKeyboard2;
@@ -53,18 +53,13 @@ public class Player implements KeyboardHandler {
 
     }
 
-    public GridPosition getPos() {
-        return pos;
-    }
+
 
     public int getItems() {
         return items;
     }
 
-    public void whencolide(){
 
-        items ++;
-    }
     public void resetItems(){
         items=0;
     }
@@ -197,4 +192,13 @@ public class Player implements KeyboardHandler {
 
     }
 
+    @Override
+    public GridPosition getPosition() {
+        return pos;
+    }
+
+    @Override
+    public void whenCollisionHappens() {
+        items++;
+    }
 }

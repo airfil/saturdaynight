@@ -2,11 +2,12 @@ package org.academiadecodigo.enuminatti.saturdaynight;
 
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.graphics.Text;
 
 /**
  * Created by codecadet on 09/10/17.
  */
-public class Chick  {
+public class Chick implements  Collidable {
 
     private GridPosition chickPosition;
     private Rectangle chickRectangle;
@@ -89,4 +90,20 @@ public class Chick  {
     }
 
 
+    @Override
+    public GridPosition getPosition() {
+        return chickPosition;
+    }
+
+    @Override
+    public void whenCollisionHappens() {
+
+        chickRectangle.delete();
+
+        Text endtext = new Text(Grid.WIDTH/2 ,Grid.HEIGHT/2 ,"End");
+        endtext.setColor(Color.RED);
+        endtext.draw();
+
+
+    }
 }

@@ -6,6 +6,7 @@ package org.academiadecodigo.enuminatti.saturdaynight;
 public interface Collidable {
 
 
+    public abstract GridPosition getPosition();
 
     public abstract void whenCollisionHappens();
 
