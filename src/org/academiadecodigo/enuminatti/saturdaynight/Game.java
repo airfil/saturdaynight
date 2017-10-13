@@ -32,7 +32,7 @@ public class Game {
         Item item = new Item(gameGrid.newGridPostion(20, 25));
 
         mycollidabelObjects = new Collidable[]{mychick, player1, player2, item};
-        myCollisionDetector = new CollisionDetector(mycollidabelObjects);
+    //    myCollisionDetector = new CollisionDetector(mycollidabelObjects);
 
 
     }
