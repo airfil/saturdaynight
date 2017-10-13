@@ -6,9 +6,11 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 /**
  * Created by codecadet on 09/10/17.
  */
-public class Item implements Collidable{
+public class Item implements Collidable {
 
-    private Grid itemGrid;
+    // CONSTANT the typeof this Gameobject will alwasys be a Item
+    public static final TypeOfGameobjects myType = TypeOfGameobjects.ITEM;
+
     private GridPosition itemPosition;
     private Rectangle itemRectangle;
 
@@ -28,31 +30,13 @@ public class Item implements Collidable{
     }
 
 
-    public void setItemGrid(Grid itemGrid) {
-        this.itemGrid = itemGrid;
-    }
-
-    public GridPosition getItemPosition() {
-        return itemPosition;
-    }
-
-    public Rectangle getItemRectangle() {
-        return itemRectangle;
-    }
-
-    @Override
-    public GridPosition getPosition() {
-        return itemPosition;
-    }
-
-    @Override
-    public void whenCollisionHappens() {
+    public void itemrespawn() {
 
         itemRectangle.delete();
 
 
-        itemPosition.setCol ((int)Math.floor(Math.random() * itemPosition.getGameGrid().getCols() - 2));
-        itemPosition.setRow ((int)Math.floor(Math.random() * itemPosition.getGameGrid().getRows() - 2));
+        itemPosition.setCol((int) Math.floor(Math.random() * itemPosition.getGameGrid().getCols() - 2));
+        itemPosition.setRow((int) Math.floor(Math.random() * itemPosition.getGameGrid().getRows() - 2));
 
         int x = itemPosition.getGameGrid().colToX(itemPosition.getCol());
         int y = itemPosition.getGameGrid().rowToY(itemPosition.getRow());
@@ -63,4 +47,21 @@ public class Item implements Collidable{
         itemRectangle.fill();
 
     }
+
+
+    @Override
+    public TypeOfGameobjects getType() {
+        return myType;
+    }
+
+    public GridPosition getItemPosition() {
+        return itemPosition;
+    }
+
+    @Override
+    public GridPosition getPosition() {
+        return itemPosition;
+    }
+
+
 }

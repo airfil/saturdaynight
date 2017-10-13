@@ -12,101 +12,101 @@ import java.security.Key;
 /**
  * Created by codecadet on 09/10/17.
  */
-public class Player implements KeyboardHandler, Collidable{
+public class Player implements KeyboardHandler, Collidable {
 
-    Keyboard playerKeyboard;
-    Keyboard playerKeyboard2;
-    KeyboardEvent[] events;
-    KeyboardEvent[] events2;
-    GridPosition pos;
-    Rectangle playerRectangle;
-    int items=0 ;
+    // CONSTANT the typeof this Gameobject will alwasys be a Player
+    public static final TypeOfGameobjects myType = TypeOfGameobjects.PLAYER;
 
+    //Key binds for PlayerOne and PlayerTwo
+    public static final int[] keyPlayer1 = {KeyboardEvent.KEY_LEFT,
+            KeyboardEvent.KEY_RIGHT, KeyboardEvent.KEY_DOWN, KeyboardEvent.KEY_UP};
 
-
-
-    public Player(GridPosition pos,int number) {
+    public static final int[] keyPlayer2 = {KeyboardEvent.KEY_A,
+            KeyboardEvent.KEY_D, KeyboardEvent.KEY_S, KeyboardEvent.KEY_W};
 
 
+    // Keyboard Related Proprety's
+    private Keyboard playerKeyboard;
+    KeyboardEvent[] pOneKeyboardEvents;
 
-        this.pos=pos;
 
-        this.pos.setCurrentDirection(Direction.NODIRECTION);
+    //Player Positon and Rectangle
+    private TypeOfGameobjects playertype;
+    private GridPosition pos;
+    private Rectangle playerRectangle;
 
+
+    //Player support proprities
+    private int items = 0;
+    private int moves = 0;
+
+
+    public Player(GridPosition pos, int mycontroler) {
+
+        //Initializng the pos of the player
+        this.pos = pos;
         int x = pos.getGameGrid().colToX(pos.getCol());
         int y = pos.getGameGrid().rowToY(pos.getRow());
 
+        //Giving initial direction to the player
+        this.pos.setCurrentDirection(Direction.NODIRECTION);
+
+
+        if (mycontroler == 1) {
+
+            createKeyboards(keyPlayer1);
+            this.playerRectangle = new Rectangle(x, y, 15, 15);
+            this.playerRectangle.setColor(Color.BLUE);
+            this.playerRectangle.fill();
+
+        } else {
+
+            createKeyboards(keyPlayer2);
+            this.playerRectangle = new Rectangle(x, y, 15, 15);
+            this.playerRectangle.setColor(Color.RED);
+            this.playerRectangle.fill();
+        }
+
+    }
+
+    private void createKeyboards(int[] keys) {
+
         playerKeyboard = new Keyboard(this);
-        playerKeyboard2 = new Keyboard(this);
 
-        playerRectangle = new Rectangle(x,y,15,15);
-        playerRectangle.setColor(Color.BLUE);
-        playerRectangle.fill();
+        pOneKeyboardEvents = new KeyboardEvent[keyPlayer1.length];
 
-        if(number == 1){
-            playerOneEvents();
-        }
-        if(number == 2){
-            playerTwoEvents();
+        for (int i = 0; i < pOneKeyboardEvents.length; i++) {
 
-        }
-
-    }
-
-
-
-    public int getItems() {
-        return items;
-    }
-
-
-    public void resetItems(){
-        items=0;
-    }
-
-    //Player One
-    public KeyboardEvent[] playerOneEvents () {
-        int[] keys = {KeyboardEvent.KEY_LEFT, KeyboardEvent.KEY_RIGHT, KeyboardEvent.KEY_DOWN, KeyboardEvent.KEY_UP};
-
-        KeyboardEvent[] pOneKeyboardEvents = new KeyboardEvent[keys.length];
-
-        keyboardEvents(pOneKeyboardEvents , keys, playerKeyboard);
-
-
-        return pOneKeyboardEvents;
-    }
-
-    //Player Two
-    public KeyboardEvent[] playerTwoEvents () {
-        int[] keys ={KeyboardEvent.KEY_A, KeyboardEvent.KEY_D, KeyboardEvent.KEY_S, KeyboardEvent.KEY_W};
-
-        KeyboardEvent[] pTwoKeyboardsEvents = new KeyboardEvent[keys.length];
-        keyboardEvents(pTwoKeyboardsEvents, keys, playerKeyboard2);
-
-
-        return pTwoKeyboardsEvents;
-    }
-
-
-    private  void keyboardEvents(KeyboardEvent[] keyboard,int keys[],Keyboard pickKeyboard){
-
-
-
-        for (int i = 0; i < keyboard.length; i++) {
-
-            keyboard[i] = new KeyboardEvent();
-            keyboard[i].setKey(keys[i]);
-            keyboard[i].setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-            pickKeyboard.addEventListener(keyboard[i]);
+            pOneKeyboardEvents[i] = new KeyboardEvent();
+            pOneKeyboardEvents[i].setKey(keys[i]);
+            pOneKeyboardEvents[i].setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+            playerKeyboard.addEventListener(pOneKeyboardEvents[i]);
 
         }
 
 
     }
+
 
     public void accelarete() {
 
 
+        checkInLimmits();
+
+        int colDirectionMov = pos.getCurrentDirection().col * Grid.CELLSIZE;
+
+        int rowDirectionMov = pos.getCurrentDirection().row * Grid.CELLSIZE;
+
+        playerRectangle.translate(colDirectionMov, rowDirectionMov);
+
+        pos.setCurrentDirection(Direction.NODIRECTION);
+
+        moves--;
+
+
+    }
+
+    public void checkInLimmits() {
 
         switch (pos.getCurrentDirection()) {
 
@@ -114,7 +114,7 @@ public class Player implements KeyboardHandler, Collidable{
                 pos.moveUp();
                 break;
             case DOWN:
-               pos.moveDown();
+                pos.moveDown();
                 break;
             case RIGTH:
                 pos.moveRigth();
@@ -125,64 +125,79 @@ public class Player implements KeyboardHandler, Collidable{
 
 
         }
-
-
-
-       // System.out.println(pos.getCurrentDirection().row );
-
-        int colDirectionMov = pos.getCurrentDirection().col * Grid.CELLSIZE;
-
-        int rowDirectionMov = pos.getCurrentDirection().row * Grid.CELLSIZE;
-
-        playerRectangle.translate(colDirectionMov, rowDirectionMov);
-
-        pos.setCurrentDirection(Direction.NODIRECTION);
-
-
     }
 
+    public void addItemToPlayer() {
+        items++;
+    }
+
+
+    @Override
+    public GridPosition getPosition() {
+        return pos;
+    }
+
+    public int getItems() {
+        return items;
+    }
+
+
+    public void resetItems() {
+        items = 0;
+    }
+
+    @Override
+    public TypeOfGameobjects getType() {
+        return myType;
+    }
 
 
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
-        if(keyboardEvent.getKey() == KeyboardEvent.KEY_UP){
+        if (moves != 0) {
 
-            pos.setCurrentDirection(Direction.UP);
-        }
+            System.out.println("Player: " + items);
 
-        if(keyboardEvent.getKey() == KeyboardEvent.KEY_DOWN){
+            if (keyboardEvent.getKey() == KeyboardEvent.KEY_UP) {
 
-            pos.setCurrentDirection(Direction.DOWN);
-        }
+                pos.setCurrentDirection(Direction.UP);
 
-        if(keyboardEvent.getKey() == keyboardEvent.KEY_RIGHT){
+            }
 
-            pos.setCurrentDirection(Direction.RIGTH);
-        }
+            if (keyboardEvent.getKey() == KeyboardEvent.KEY_DOWN) {
 
-        if (keyboardEvent.getKey() == keyboardEvent.KEY_LEFT){
+                pos.setCurrentDirection(Direction.DOWN);
+            }
 
-            pos.setCurrentDirection(Direction.LEFT);
-        }
+            if (keyboardEvent.getKey() == keyboardEvent.KEY_RIGHT) {
 
-        if (keyboardEvent.getKey() == keyboardEvent.KEY_W){
-            pos.setCurrentDirection(Direction.UP);
-        }
+                pos.setCurrentDirection(Direction.RIGTH);
+            }
 
-        if (keyboardEvent.getKey() == keyboardEvent.KEY_S){
+            if (keyboardEvent.getKey() == keyboardEvent.KEY_LEFT) {
 
-            pos.setCurrentDirection(Direction.DOWN);
-        }
+                pos.setCurrentDirection(Direction.LEFT);
+            }
 
-        if (keyboardEvent.getKey() == keyboardEvent.KEY_A){
+            if (keyboardEvent.getKey() == keyboardEvent.KEY_W) {
+                pos.setCurrentDirection(Direction.UP);
+            }
 
-            pos.setCurrentDirection(Direction.LEFT);
-        }
+            if (keyboardEvent.getKey() == keyboardEvent.KEY_S) {
 
-        if (keyboardEvent.getKey() == keyboardEvent.KEY_D){
+                pos.setCurrentDirection(Direction.DOWN);
+            }
 
-            pos.setCurrentDirection(Direction.RIGTH);
+            if (keyboardEvent.getKey() == keyboardEvent.KEY_A) {
+
+                pos.setCurrentDirection(Direction.LEFT);
+            }
+
+            if (keyboardEvent.getKey() == keyboardEvent.KEY_D) {
+
+                pos.setCurrentDirection(Direction.RIGTH);
+            }
         }
     }
 
@@ -192,13 +207,7 @@ public class Player implements KeyboardHandler, Collidable{
 
     }
 
-    @Override
-    public GridPosition getPosition() {
-        return pos;
-    }
 
-    @Override
-    public void whenCollisionHappens() {
-        items++;
-    }
+
+
 }

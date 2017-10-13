@@ -25,15 +25,6 @@ public class GridPosition {
 
     }
 
-    public void setCurrentDirection(Direction currentDirection) {
-        this.currentDirection = currentDirection;
-    }
-
-    public Direction getCurrentDirection() {
-        return currentDirection;
-    }
-
-
     // Creating constructor for generating a random position for the various Objects
     public GridPosition(Grid gameGrid) {
 
@@ -73,27 +64,6 @@ public class GridPosition {
 
     }
 
-    public Grid getGameGrid() {
-        return gameGrid;
-    }
-
-    public int getRow() {
-        return row;
-    }
-
-    public int getCol() {
-
-        return col;
-    }
-
-    public void setRow(int row) {
-        this.row = row;
-    }
-
-    public void setCol(int col) {
-
-        this.col = col;
-    }
 
     public void moveUp() {
 
@@ -168,6 +138,37 @@ public class GridPosition {
         }
 
 
+    }
+
+
+    public Grid getGameGrid() {
+        return gameGrid;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+
+        return col;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public void setCol(int col) {
+
+        this.col = col;
+    }
+
+    public void setCurrentDirection(Direction currentDirection) {
+        this.currentDirection = currentDirection;
+    }
+
+    public Direction getCurrentDirection() {
+        return currentDirection;
     }
 
 

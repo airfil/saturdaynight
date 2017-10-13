@@ -30,6 +30,10 @@ public class CollisionDetector {
     public void checkPlayerCollison(Player player) {
         for (Collidable c : collidebels) {
 
+            if(player == c){
+                continue;
+            }
+
             int col = player.getPosition().getCol();
             int row = player.getPosition().getRow();
 
@@ -37,13 +41,16 @@ public class CollisionDetector {
 
                 if (c instanceof Chick) {
                     Chick chick = (Chick) c;
-                    c.whenCollisionHappens();
+                    if (player.getItems()== 3) {
+                        chick.whenCollisionHappens();
+                    }
+                    player.resetItems();
                 }
 
                 if (c instanceof Item) {
                     Item item = (Item) c;
-                    item.whenCollisionHappens();
-                    player.whenCollisionHappens();
+                    item.itemrespawn();
+                    player.addItemToPlayer();
 
                 }
 
@@ -63,7 +70,7 @@ public class CollisionDetector {
 
                 if (c instanceof Player) {
                     Player myplayer = (Player) c;
-                    if (myplayer.items == 3) {
+                    if (myplayer.getItems() == 3) {
                         chick.whenCollisionHappens();
                     }
                     myplayer.resetItems();
