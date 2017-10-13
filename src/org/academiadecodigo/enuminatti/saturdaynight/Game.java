@@ -39,54 +39,5 @@ public class Game {
     }
 
 
-    public void gamestart() throws InterruptedException {
-        while (true) {
-
-            mychick.move();
-            player1.accelarete();
-            dancer.move();
-            collision(player1, item);
-            colision(player1, mychick);
-            player2.accelarete();
-            collision(player2, item);
-            colision(player2, mychick);
-            Thread.sleep(delay);
-
-
-        }
-    }
-
-
-    public void collision(Player players, Item items) {
-
-        GridPosition item = items.getItemPosition();
-        GridPosition player = players.getPos();
-
-        if (player.getCol() == item.getCol() && player.getRow() == item.getRow()) {
-            players.whencolide();
-            System.out.println(players.items);
-
-
-            this.item.getItemRectangle().delete();
-            this.item = new Item(gameGrid.newGridPosition(gameGrid));
-        }
-
-
-    }
-    public void colision(Player players, Chick chicks){
-        GridPosition chick = chicks.getChickPosition();
-        GridPosition player = players.getPos();
-
-        if(player.getCol() == chick.getCol() && player.getRow() == chick.getRow()) {
-
-
-            if(players.getItems() >=3){
-
-                System.out.println("Win");
-                players.resetItems();
-            }
-        }
-
-    }
-
+   
 }
