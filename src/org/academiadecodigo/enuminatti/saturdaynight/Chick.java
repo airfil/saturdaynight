@@ -9,6 +9,8 @@ import org.academiadecodigo.simplegraphics.graphics.Text;
  */
 public class Chick implements Collidable {
 
+    public static final TypeOfGameobjects myType = TypeOfGameobjects.CHICK;
+
     private GridPosition chickPosition;
     private Rectangle chickRectangle;
     private TypeOfGameobjects mytype;

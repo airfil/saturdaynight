@@ -1,7 +1,6 @@
 package org.academiadecodigo.enuminatti.saturdaynight;
 
 
-
 /**
  * Created by codecadet on 12/10/17.
  */
@@ -47,20 +46,24 @@ public class CollisionDetector {
 
             if (col == c.getPosition().getCol() && row == c.getPosition().getRow()) {
 
-                if (c instanceof Chick) {
-                    Chick chick = (Chick) c;
-                    if (player.getItems() == 3) {
-                        chick.whenCollisionHappens();
-                    }
-                    player.resetItems();
+
+                switch (c.getType()) {
+                    case CHICK:
+                        Chick chick = (Chick) c;
+                        if (player.getItems() == 3) {
+                            chick.whenCollisionHappens();
+                        }
+                        player.resetItems();
+                        break;
+                    case ITEM:
+                        Item item = (Item) c;
+                        item.itemrespawn();
+                        player.addItemToPlayer();
+                        break;
+
                 }
 
-                if (c instanceof Item) {
-                    Item item = (Item) c;
-                    item.itemrespawn();
-                    player.addItemToPlayer();
 
-                }
 
             }
         }

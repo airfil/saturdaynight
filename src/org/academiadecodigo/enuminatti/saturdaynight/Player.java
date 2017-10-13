@@ -31,7 +31,6 @@ public class Player implements KeyboardHandler, Collidable {
 
 
     //Player Positon and Rectangle
-    private TypeOfGameobjects playertype;
     private GridPosition pos;
     private Rectangle playerRectangle;
 
