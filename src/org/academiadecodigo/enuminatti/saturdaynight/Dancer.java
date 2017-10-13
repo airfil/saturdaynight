@@ -12,7 +12,9 @@ public class Dancer {
     private GridPosition dancerPosition;
     private Rectangle dancerRectangle;
     private Grid dancerGrid;
-    private int moves = 0;
+    private int moves = 4;
+    private int square = 1;
+    private boolean squaredancing;
 
     public Dancer(GridPosition dancerPosition) {
 
@@ -26,31 +28,45 @@ public class Dancer {
         dancerRectangle.setColor(Color.GREEN);
         dancerRectangle.fill();
         dancerPosition.setCurrentDirection(Direction.UP);
+        squaredancing = true;
 
     }
 
 
-    public GridPosition getDancerPosition() {
-        return dancerPosition;
-    }
+
+
+
 
 
     public void move() {
 
-        int random = (int) Math.ceil(Math.random() * 100);
+        Direction dancerdirection = dancerPosition.getCurrentDirection();
 
-        if (random >= 60) {
-            dancerPosition.setCurrentDirection(Direction.angleDirection(dancerPosition.getCurrentDirection()));
-            moves = 4;
-            accelarete();
-            return;
+        if (squaredancing && moves ==0) {
+            System.out.println("Entrie");
+            dancerPosition.setCurrentDirection(Direction.angleDirection(dancerdirection));
+            moves = 3;
+            square++;
+            squaredancing= true;
         }
 
-        if (moves == 0 ) {
+        if(square==4){
+            squaredancing = false;
+        }
+
+        if (!squaredancing && moves==0) {
+
+            int random = (int) Math.ceil(Math.random() * 100);
+
+            if(random <= 60){
+                System.out.println("SquareAgain");
+                moves = 4;
+                squaredancing = true;
+                square = 0;
+            }
             getDancerPosition().createRandomDirection();
-            moves = 5;
-            accelarete();
-            return;
+            moves = 3;
+
         }
 
         moves--;
@@ -89,6 +105,9 @@ public class Dancer {
 
     }
 
+    public GridPosition getDancerPosition() {
+        return dancerPosition;
+    }
 
 }
 
