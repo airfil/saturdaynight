@@ -13,7 +13,6 @@ public class Game {
     private CollisionDetector myCollisionDetector;
 
 
-
     public Game() {
 
         init();
@@ -27,8 +26,8 @@ public class Game {
         Chick mychick = new Chick(gameGrid.newGridPostion(25, 25));
         mychick.setChickGrid(gameGrid);
 
-        Player player1 = new Player(gameGrid.newGridPostion(25, 25),1);
-        Player player2 = new Player(gameGrid.newGridPostion(20, 20),0);
+        Player player1 = new Player(gameGrid.newGridPostion(25, 25), 1);
+        Player player2 = new Player(gameGrid.newGridPostion(20, 20), 0);
 
         Item item = new Item(gameGrid.newGridPostion(20, 25));
 
@@ -60,14 +59,11 @@ public class Game {
             }
 
 
-
             Thread.sleep(delay);
 
 
         }
     }
-
-
 
 
 }

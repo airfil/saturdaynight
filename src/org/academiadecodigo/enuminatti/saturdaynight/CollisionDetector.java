@@ -1,5 +1,7 @@
 package org.academiadecodigo.enuminatti.saturdaynight;
 
+
+
 /**
  * Created by codecadet on 12/10/17.
  */
@@ -13,14 +15,20 @@ public class CollisionDetector {
 
     public void checkObjectColliding(Collidable objChecking) {
 
-        if (objChecking instanceof Player) {
-            Player player = (Player) objChecking;
-            checkPlayerCollison(player);
-        }
+        switch (objChecking.getType()) {
 
-        if (objChecking instanceof Chick) {
-            Chick mychick = (Chick) objChecking;
-            checkChickCollision(mychick);
+
+            case CHICK:
+                Chick chick = (Chick) objChecking;
+                checkChickCollision(chick);
+                break;
+            case PLAYER:
+                Player player = (Player) objChecking;
+                checkPlayerCollison(player);
+                break;
+            default:
+                return;
+
         }
 
 
@@ -30,7 +38,7 @@ public class CollisionDetector {
     public void checkPlayerCollison(Player player) {
         for (Collidable c : collidebels) {
 
-            if(player == c){
+            if (player == c) {
                 continue;
             }
 
@@ -41,7 +49,7 @@ public class CollisionDetector {
 
                 if (c instanceof Chick) {
                     Chick chick = (Chick) c;
-                    if (player.getItems()== 3) {
+                    if (player.getItems() == 3) {
                         chick.whenCollisionHappens();
                     }
                     player.resetItems();

@@ -63,7 +63,6 @@ public class Chick implements Collidable {
     }
 
 
-
     public void accelerate() {
 
         // Checking the limits , to move safely without leaving the gamegrid

@@ -208,6 +208,4 @@ public class Player implements KeyboardHandler, Collidable {
     }
 
 
-
-
 }
