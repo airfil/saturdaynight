@@ -1,16 +1,26 @@
+
 package org.academiadecodigo.enuminatti.saturdaynight;
 
 /**
  * Created by codecadet on 09/10/17.
  */
+
 public class Game {
 
     static public final long delay = 200;
     static public final int COLS = 80;
     static public final int ROWS = 60;
     private Grid gameGrid;
+
     private Collidable[] mycollidabelObjects;
     private CollisionDetector myCollisionDetector;
+
+
+    private Chick mychick;
+    private Player player1;
+    private Player player2;
+    private Item item;
+    private Dancer dancer;
 
 
     public Game() {
@@ -31,8 +41,12 @@ public class Game {
 
         Item item = new Item(gameGrid.newGridPostion(20, 25));
 
-        mycollidabelObjects = new Collidable[]{mychick, player1, player2, item};
-    //    myCollisionDetector = new CollisionDetector(mycollidabelObjects);
+        Dancer dancer = new Dancer(gameGrid.newGridPostion(10, 10));
+
+
+        mycollidabelObjects = new Collidable[]{mychick, player1, player2, item,dancer};
+        myCollisionDetector = new CollisionDetector(mycollidabelObjects);
+
 
 
     }
@@ -41,29 +55,44 @@ public class Game {
     public void gamestart() throws InterruptedException {
         while (true) {
 
+
             for (int i = 0; i < mycollidabelObjects.length; i++) {
+                System.out.println(mycollidabelObjects[i].getType());
+                System.out.println(i);
+                switch (mycollidabelObjects[i].getType()) {
 
-                if (mycollidabelObjects[i] instanceof Player) {
-                    Player myplayer = (Player) mycollidabelObjects[i];
-                    myplayer.accelarete();
-                    myCollisionDetector.checkObjectColliding(myplayer);
-                    continue;
+                    case CHICK:
+                        Chick myChick = (Chick) mycollidabelObjects[i];
+                        myChick.move();
+                        myCollisionDetector.checkObjectColliding(myChick);
+                        continue;
+
+                    case PLAYER:
+                        Player myplayer = (Player) mycollidabelObjects[i];
+                        myplayer.accelarete();
+                        myCollisionDetector.checkObjectColliding(myplayer);
+                        continue;
+
+                    case DANCER:
+                        Dancer dancer = (Dancer) mycollidabelObjects[i];
+                        dancer.move();
+                        myCollisionDetector.checkObjectColliding(dancer);
+                        continue;
+
+
                 }
 
-                if (mycollidabelObjects[i] instanceof Chick) {
-                    Chick myChick = (Chick) mycollidabelObjects[i];
-                    myChick.move();
-                    myCollisionDetector.checkObjectColliding(myChick);
-                    continue;
-                }
+
+                Thread.sleep(delay);
+
+
             }
-
-
-            Thread.sleep(delay);
-
-
         }
+
+
     }
-
-
 }
+
+
+
+

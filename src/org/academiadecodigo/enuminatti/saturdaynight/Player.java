@@ -86,6 +86,16 @@ public class Player implements KeyboardHandler, Collidable {
 
     }
 
+    public void beingPushed(Direction newDirection){
+
+
+
+        pos.setCurrentDirection(newDirection);
+
+        moves = 3;
+        accelarete();
+
+    }
 
     public void accelarete() {
 
@@ -98,7 +108,9 @@ public class Player implements KeyboardHandler, Collidable {
 
         playerRectangle.translate(colDirectionMov, rowDirectionMov);
 
-        pos.setCurrentDirection(Direction.NODIRECTION);
+        if(moves<=0) {
+            pos.setCurrentDirection(Direction.NODIRECTION);
+        }
 
         moves--;
 

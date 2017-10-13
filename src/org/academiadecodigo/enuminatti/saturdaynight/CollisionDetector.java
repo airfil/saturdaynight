@@ -25,6 +25,10 @@ public class CollisionDetector {
                 Player player = (Player) objChecking;
                 checkPlayerCollison(player);
                 break;
+            case DANCER:
+                Dancer dancer = (Dancer) objChecking;
+                checkDancerCollision(dancer);
+                break;
             default:
                 return;
 
@@ -60,9 +64,12 @@ public class CollisionDetector {
                         item.itemrespawn();
                         player.addItemToPlayer();
                         break;
+                    case DANCER:
+                        Dancer dancer = (Dancer) c;
+                        player.beingPushed(dancer.getPosition().getCurrentDirection());
+                        break;
 
                 }
-
 
 
             }
@@ -79,12 +86,14 @@ public class CollisionDetector {
 
             if (col == c.getPosition().getCol() && row == c.getPosition().getRow()) {
 
-                if (c instanceof Player) {
-                    Player myplayer = (Player) c;
-                    if (myplayer.getItems() == 3) {
+                if (c.getType() == TypeOfGameobjects.PLAYER) {
+
+                    Player player = (Player) c;
+                    if (player.getItems() == 3) {
                         chick.whenCollisionHappens();
                     }
-                    myplayer.resetItems();
+                    player.resetItems();
+                    break;
 
                 }
 
@@ -93,4 +102,27 @@ public class CollisionDetector {
     }
 
 
+    public void checkDancerCollision(Dancer dancer) {
+
+        for (Collidable c : collidebels) {
+
+            int col = dancer.getPosition().getCol();
+            int row = dancer.getPosition().getRow();
+
+            if (col == c.getPosition().getCol() && row == c.getPosition().getRow()) {
+
+                if (c.getType() == TypeOfGameobjects.PLAYER) {
+
+                    Player player = (Player) c;
+                    player.beingPushed(dancer.getPosition().getCurrentDirection());
+
+                }
+            }
+
+
+        }
+
+
+    }
 }
+
