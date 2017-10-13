@@ -45,5 +45,25 @@ public enum Direction {
 
     }
 
+    static public Direction angleDirection(Direction myDirection ){
+
+
+        switch (myDirection){
+
+            case RIGTH:return Direction.DOWN;
+
+            case UP: return Direction.RIGTH;
+
+            case DOWN:return Direction.LEFT;
+
+            case LEFT:return Direction.UP;
+
+            default:return  Direction.NODIRECTION;
+
+        }
+
+
+    }
+
 
 }

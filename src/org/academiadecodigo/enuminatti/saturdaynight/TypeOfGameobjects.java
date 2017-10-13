@@ -6,5 +6,8 @@ package org.academiadecodigo.enuminatti.saturdaynight;
 public enum TypeOfGameobjects {
     CHICK,
     PLAYER,
+    DANCER,
     ITEM;
 }
+
+
