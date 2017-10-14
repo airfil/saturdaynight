@@ -11,6 +11,7 @@ public class CollisionDetector {
     private LinkedList<Collidable> collidebels;
     private LinkedList<Item> myitems;
 
+
     public CollisionDetector(LinkedList<Collidable> collidables, LinkedList<Item> myitems) {
         this.collidebels = collidables;
         this.myitems = myitems;
@@ -60,15 +61,18 @@ public class CollisionDetector {
                 switch (c.getType()) {
                     case CHICK:
                         Chick chick = (Chick) c;
-                        if (player.getItems() == 3) {
-                            chick.whenCollisionHappens();
+                        if (player.getItems() == 5) {
+                        chick.whenCollisionHappens();
                         }
                         player.resetItems();
                         break;
                     case ITEM:
                         Item item = (Item) c;
-                        item.itemRespawn();
-                        player.addItemToPlayer();
+                        if(item.isItemStatus() == true) {
+                            item.itemRespawn();
+                            player.addItemToPlayer();;
+                            break;
+                        }
                         break;
 
                     case DANCER:
@@ -96,13 +100,29 @@ public class CollisionDetector {
 
                 if (c.getType() == TypeOfGameObjects.PLAYER) {
 
+
                     Player player = (Player) c;
+                    int chanceToWin3 = (int) Math.random() + (player.getItems() * 5)  +  player.getConfidence();
+
+                    if (player.getItems() == 3){
+                        if(chanceToWin3 > 90){
+
+                            System.out.println(chanceToWin3);
+                            System.out.println(player.getItems() + " " + player.getConfidence() + " vamos tentar");
+                            chick.whenCollisionHappens();
+                            continue;
+                        }
+                        System.out.println("nao tas suficiente bebado");
+                        continue;
+
+                    }
                     if (player.getItems() == 5) {
                         chick.whenCollisionHappens();
                         continue;
                     }
-                    //if(random > 20 + player.baditem*5 + chick)
+
                     player.resetItems();
+                    player.resetConfidence();
                     break;
 
                 }
@@ -148,7 +168,7 @@ public class CollisionDetector {
 
                 if (myCollideble.getType() == TypeOfGameObjects.PLAYER) {
                     if (item.isItemStatus() == true) {
-                        System.out.println("estou a interagir");
+                        System.out.println("item");
                         Player myplayer = (Player) myCollideble;
                         myplayer.addItemToPlayer();
                         item.itemRespawn();

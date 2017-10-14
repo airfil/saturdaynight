@@ -14,8 +14,8 @@ public class Game {
     TypeOfGameObjects.CHICK , TypeOfGameObjects.DANCER, TypeOfGameObjects.DANCER , TypeOfGameObjects.DANCER};
 
     static public final long delay = 25;
-    static public final int COLS = 40;
-    static public final int ROWS = 25;
+    static public final int COLS = 32;
+    static public final int ROWS = 20;
     private Grid gameGrid;
 
     private LinkedList<Collidable> mycollidabelObjects;
