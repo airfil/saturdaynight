@@ -54,14 +54,14 @@ public class Player implements KeyboardHandler, Collidable {
         if (mycontroler == 1) {
 
             createKeyboards(keyPlayer1);
-            this.playerRectangle = new Rectangle(x, y, 15, 15);
+            this.playerRectangle = new Rectangle(x, y, 40, 40);
             this.playerRectangle.setColor(Color.BLUE);
             this.playerRectangle.fill();
 
         } else {
 
             createKeyboards(keyPlayer2);
-            this.playerRectangle = new Rectangle(x, y, 15, 15);
+            this.playerRectangle = new Rectangle(x, y, 40, 40);
             this.playerRectangle.setColor(Color.RED);
             this.playerRectangle.fill();
         }

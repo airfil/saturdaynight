@@ -8,8 +8,8 @@ package org.academiadecodigo.enuminatti.saturdaynight;
 public class Game {
 
     static public final long delay = 200;
-    static public final int COLS = 80;
-    static public final int ROWS = 60;
+    static public final int COLS = 30;
+    static public final int ROWS = 25;
     private Grid gameGrid;
 
     private Collidable[] mycollidabelObjects;
