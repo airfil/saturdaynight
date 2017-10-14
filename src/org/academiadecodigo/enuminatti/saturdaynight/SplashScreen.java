@@ -11,7 +11,6 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
  */
 public class SplashScreen implements KeyboardHandler {
 
-    private Game newGame;
     private Picture menuPicture;
     private Keyboard menuKeyboard;
     private KeyboardEvent[] menuKeyboardEvent;
@@ -19,9 +18,9 @@ public class SplashScreen implements KeyboardHandler {
 
 
     public SplashScreen() {
+
         menuPicture = new Picture(0, 0, "/entry.png");
         createMenuKeyboard();
-
     }
 
     public void init() {
@@ -45,7 +44,7 @@ public class SplashScreen implements KeyboardHandler {
 
     public void gameInitialization() {
 
-        newGame = new Game();
+        Game newGame = new Game();
         try {
             newGame.gamestart();
         } catch (InterruptedException ex) {
