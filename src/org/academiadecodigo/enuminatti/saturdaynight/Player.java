@@ -56,14 +56,15 @@ public class Player implements KeyboardHandler, Collidable {
             this.playerRectangle = new Rectangle(x, y, 15, 15);
             this.playerRectangle.setColor(Color.BLUE);
             this.playerRectangle.fill();
+            return;
 
-        } else {
-
-            createKeyboards(keyPlayer2);
-            this.playerRectangle = new Rectangle(x, y, 15, 15);
-            this.playerRectangle.setColor(Color.RED);
-            this.playerRectangle.fill();
         }
+
+        createKeyboards(keyPlayer2);
+        this.playerRectangle = new Rectangle(x, y, 15, 15);
+        this.playerRectangle.setColor(Color.RED);
+        this.playerRectangle.fill();
+
 
     }
 
@@ -85,8 +86,7 @@ public class Player implements KeyboardHandler, Collidable {
 
     }
 
-    public void beingPushed(Direction newDirection){
-
+    public void beingPushed(Direction newDirection) {
 
 
         pos.setCurrentDirection(newDirection);
@@ -107,7 +107,7 @@ public class Player implements KeyboardHandler, Collidable {
 
         playerRectangle.translate(colDirectionMov, rowDirectionMov);
 
-        if(moves<=0) {
+        if (moves <= 0) {
             pos.setCurrentDirection(Direction.NODIRECTION);
         }
 
