@@ -1,26 +1,25 @@
 
 package org.academiadecodigo.enuminatti.saturdaynight;
 
+import java.util.LinkedList;
+
 /**
  * Created by codecadet on 09/10/17.
  */
 
 public class Game {
 
-    static public final long delay = 200;
+
+    public static  final  TypeOfGameobjects[] objectsToCreate = {TypeOfGameobjects.PLAYER,TypeOfGameobjects.PLAYER ,
+    TypeOfGameobjects.CHICK , TypeOfGameobjects.DANCER, TypeOfGameobjects.DANCER , TypeOfGameobjects.DANCER};
+
+    static public final long delay = 25;
     static public final int COLS = 80;
     static public final int ROWS = 60;
     private Grid gameGrid;
 
-    private Collidable[] mycollidabelObjects;
+    private LinkedList<Collidable> mycollidabelObjects;
     private CollisionDetector myCollisionDetector;
-
-
-    private Chick mychick;
-    private Player player1;
-    private Player player2;
-    private Item item;
-    private Dancer dancer;
 
 
     public Game() {
@@ -31,21 +30,24 @@ public class Game {
 
     public void init() {
 
+        mycollidabelObjects = new LinkedList<Collidable>();
+
         gameGrid = new Grid(COLS, ROWS);
 
-        Chick mychick = new Chick(gameGrid.newGridPostion(25, 25));
-        mychick.setChickGrid(gameGrid);
 
-        Player player1 = new Player(gameGrid.newGridPostion(25, 25), 1);
-        Player player2 = new Player(gameGrid.newGridPostion(20, 20), 0);
-
+        LinkedList<Item> myItems = new LinkedList<Item>();
         Item item = new Item(gameGrid.newGridPostion(20, 25));
 
-        Dancer dancer = new Dancer(gameGrid.newGridPostion(10, 10));
+
+        myItems.add(item);
 
 
-        mycollidabelObjects = new Collidable[]{mychick, player1, player2, item,dancer};
-        myCollisionDetector = new CollisionDetector(mycollidabelObjects);
+        for (int i = 0 ; i < objectsToCreate.length ; i++){
+           Collidable mygameobject =  GameObjectFactory.createObjects(objectsToCreate[i],gameGrid);
+            mycollidabelObjects.add(mygameobject);
+        }
+
+        myCollisionDetector = new CollisionDetector(mycollidabelObjects,myItems);
 
 
 
@@ -56,28 +58,29 @@ public class Game {
         while (true) {
 
 
-            for (int i = 0; i < mycollidabelObjects.length; i++) {
-                System.out.println(mycollidabelObjects[i].getType());
+            for (int i = 0; i < mycollidabelObjects.size(); i++) {
+                System.out.println(mycollidabelObjects.get(i).getType());
                 System.out.println(i);
-                switch (mycollidabelObjects[i].getType()) {
+                switch (mycollidabelObjects.get(i).getType()) {
 
                     case CHICK:
-                        Chick myChick = (Chick) mycollidabelObjects[i];
+                        Chick myChick = (Chick) mycollidabelObjects.get(i);
                         myChick.move();
                         myCollisionDetector.checkObjectColliding(myChick);
-                        continue;
+                        break;
 
                     case PLAYER:
-                        Player myplayer = (Player) mycollidabelObjects[i];
+                        Player myplayer = (Player)mycollidabelObjects.get(i);
                         myplayer.accelarete();
                         myCollisionDetector.checkObjectColliding(myplayer);
-                        continue;
+                        break;
 
                     case DANCER:
-                        Dancer dancer = (Dancer) mycollidabelObjects[i];
+                        Dancer dancer = (Dancer) mycollidabelObjects.get(i);
                         dancer.move();
                         myCollisionDetector.checkObjectColliding(dancer);
-                        continue;
+                        break;
+
 
 
                 }

@@ -1,18 +1,24 @@
 package org.academiadecodigo.enuminatti.saturdaynight;
 
 
+import java.util.LinkedList;
+
 /**
  * Created by codecadet on 12/10/17.
  */
 public class CollisionDetector {
 
-    private Collidable[] collidebels;
+    private LinkedList<Collidable> collidebels;
+    private LinkedList<Item> myitems;
 
-    public CollisionDetector(Collidable[] collidables) {
+    public CollisionDetector(LinkedList<Collidable> collidables,LinkedList<Item> myitems) {
         this.collidebels = collidables;
+        this.myitems = myitems;
     }
 
     public void checkObjectColliding(Collidable objChecking) {
+
+        CheckItemCollision(objChecking);
 
         switch (objChecking.getType()) {
 
@@ -73,6 +79,8 @@ public class CollisionDetector {
 
 
             }
+
+
         }
     }
 
@@ -89,9 +97,11 @@ public class CollisionDetector {
                 if (c.getType() == TypeOfGameobjects.PLAYER) {
 
                     Player player = (Player) c;
-                    if (player.getItems() == 3) {
+                    if (player.getItems() == 5) {
                         chick.whenCollisionHappens();
+                        continue;
                     }
+                    //if(random > 20 + player.baditem*5 + chick)
                     player.resetItems();
                     break;
 
@@ -117,6 +127,31 @@ public class CollisionDetector {
                     player.beingPushed(dancer.getPosition().getCurrentDirection());
 
                 }
+            }
+
+
+        }
+
+
+    }
+
+
+    public void CheckItemCollision(Collidable myCollideble) {
+
+        int col = myCollideble.getPosition().getCol();
+        int row = myCollideble.getPosition().getRow();
+
+
+        for (Item item : myitems) {
+
+            if (col == item.getPosition().getCol() && row == item.getPosition().getRow()) {
+
+                if (myCollideble.getType() == TypeOfGameobjects.PLAYER) {
+                    Player myplayer = (Player) myCollideble;
+                    myplayer.addItemToPlayer();
+                    item.itemrespawn();
+                }
+
             }
 
 
