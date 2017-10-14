@@ -11,7 +11,7 @@ public class CollisionDetector {
     private LinkedList<Collidable> collidebels;
     private LinkedList<Item> myitems;
 
-    public CollisionDetector(LinkedList<Collidable> collidables,LinkedList<Item> myitems) {
+    public CollisionDetector(LinkedList<Collidable> collidables, LinkedList<Item> myitems) {
         this.collidebels = collidables;
         this.myitems = myitems;
     }
@@ -67,27 +67,22 @@ public class CollisionDetector {
                         break;
                     case ITEM:
                         Item item = (Item) c;
-                        if (item.isItemStatus() == true) {
-                            item.itemRespawn();
-                            player.addItemToPlayer();
-                            break;
-                        }
-
-                        player.addConfidenceToPlayer();
+                        item.itemRespawn();
+                        player.addItemToPlayer();
                         break;
 
-                case DANCER:
-                    Dancer dancer = (Dancer) c;
-                    player.beingPushed(dancer.getPosition().getCurrentDirection());
-                    break;
+                    case DANCER:
+                        Dancer dancer = (Dancer) c;
+                        player.beingPushed(dancer.getPosition().getCurrentDirection());
+                        break;
+
+                }
+
 
             }
-
-
         }
-    }
 
-}
+    }
 
 
     public void checkChickCollision(Chick chick) {
@@ -151,18 +146,25 @@ public class CollisionDetector {
 
             if (col == item.getPosition().getCol() && row == item.getPosition().getRow()) {
 
-                if (myCollideble.getType() == TypeOfGameobjects.PLAYER) {
-                    Player myplayer = (Player) myCollideble;
-                    myplayer.addItemToPlayer();
-                    item.itemrespawn();
+                if (myCollideble.getType() == TypeOfGameObjects.PLAYER) {
+                    if (item.isItemStatus() == true) {
+                        System.out.println("estou a interagir");
+                        Player myplayer = (Player) myCollideble;
+                        myplayer.addItemToPlayer();
+                        item.itemRespawn();
+                        continue;
+                    }
+                    System.out.println("Boa cerveja");
+                    Player myplayer = (Player)  myCollideble;
+                    myplayer.addConfidenceToPlayer();
+                    item.itemRespawn();
+
                 }
+
 
             }
 
 
         }
-
-
     }
 }
-

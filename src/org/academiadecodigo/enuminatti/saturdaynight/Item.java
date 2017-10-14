@@ -48,8 +48,11 @@ public class Item implements Collidable {
         int y = itemPosition.getGameGrid().rowToY(itemPosition.getRow());
 
         this.itemRectangle = new Rectangle(x, y, Grid.CELLSIZE, Grid.CELLSIZE);
+        if(this.itemStatus == false){
+            this.itemRectangle.setColor(Color.ORANGE);
+        }
 
-
+        System.out.println(itemRectangle.getColor());
         itemRectangle.fill();
 
     }

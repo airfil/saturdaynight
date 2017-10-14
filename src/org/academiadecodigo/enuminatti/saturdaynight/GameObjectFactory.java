@@ -10,7 +10,7 @@ public class GameObjectFactory {
     public static Player myPlayer = null;
 
 
-    public static Collidable createObjects(TypeOfGameobjects type, Grid gameGrid) {
+    public static Collidable createObjects(TypeOfGameObjects type, Grid gameGrid) {
 
         Collidable gameobject = null;
 
@@ -20,13 +20,13 @@ public class GameObjectFactory {
 
             case PLAYER:
                 if (myPlayer == null) {
-                    myPlayer = new Player(gameGrid.newGridPostion(25, 25), 1);
+                    myPlayer = new Player(gameGrid.newGridPosition(25, 25), 1);
                     return myPlayer;
                 }
-                myPlayer = new Player(gameGrid.newGridPostion(25, 25), 2);
+                myPlayer = new Player(gameGrid.newGridPosition(25, 25), 2);
                 return myPlayer;
 
-            case CHICK:return new Chick(gameGrid.newGridPostion(25, 25));
+            case CHICK:return new Chick(gameGrid.newGridPosition(25, 25));
 
             default: return  null;
 

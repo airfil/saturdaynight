@@ -175,7 +175,7 @@ public class Player implements KeyboardHandler, Collidable {
 
         if (moves != 0) {
 
-            System.out.println("Player: " + items);
+           // System.out.println("Player: " + items);
 
             if (keyboardEvent.getKey() == KeyboardEvent.KEY_UP) {
 

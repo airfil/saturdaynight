@@ -10,8 +10,8 @@ import java.util.LinkedList;
 public class Game {
 
 
-    public static  final  TypeOfGameobjects[] objectsToCreate = {TypeOfGameobjects.PLAYER,TypeOfGameobjects.PLAYER ,
-    TypeOfGameobjects.CHICK , TypeOfGameobjects.DANCER, TypeOfGameobjects.DANCER , TypeOfGameobjects.DANCER};
+    public static  final  TypeOfGameObjects[] objectsToCreate = {TypeOfGameObjects.PLAYER,TypeOfGameObjects.PLAYER ,
+    TypeOfGameObjects.CHICK , TypeOfGameObjects.DANCER, TypeOfGameObjects.DANCER , TypeOfGameObjects.DANCER};
 
     static public final long delay = 25;
     static public final int COLS = 80;
@@ -36,10 +36,14 @@ public class Game {
 
 
         LinkedList<Item> myItems = new LinkedList<Item>();
-        Item item = new Item(gameGrid.newGridPostion(20, 25));
+        Item item = new Item(gameGrid.newGridPosition(20,25),true);
+        Item beer = new Item(gameGrid.newGridPosition(30,12),false);
+        Item beer1 = new Item((gameGrid.newGridPosition(12,30)),false);
 
 
         myItems.add(item);
+        myItems.add(beer);
+        myItems.add(beer1);
 
 
         for (int i = 0 ; i < objectsToCreate.length ; i++){
@@ -54,13 +58,13 @@ public class Game {
     }
 
 
-    public void gamestart() throws InterruptedException {
+    public void gameStart() throws InterruptedException {
         while (true) {
 
 
             for (int i = 0; i < mycollidabelObjects.size(); i++) {
-                System.out.println(mycollidabelObjects.get(i).getType());
-                System.out.println(i);
+               // System.out.println(mycollidabelObjects.get(i).getType());
+               // System.out.println(i);
                 switch (mycollidabelObjects.get(i).getType()) {
 
                     case CHICK:
