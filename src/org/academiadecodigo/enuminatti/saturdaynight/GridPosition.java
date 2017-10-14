@@ -15,9 +15,7 @@ public class GridPosition {
 
         //The gameGrid of this position
         this.gameGrid = gameGrid;
-
         this.col = col;
-
         this.row = row;
 
         //Initializing the current Direction to NODIRECTION

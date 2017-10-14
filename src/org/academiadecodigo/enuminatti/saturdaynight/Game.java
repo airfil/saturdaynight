@@ -10,12 +10,12 @@ import java.util.LinkedList;
 public class Game {
 
 
-    public static  final  TypeOfGameobjects[] objectsToCreate = {TypeOfGameobjects.PLAYER,TypeOfGameobjects.PLAYER ,
-    TypeOfGameobjects.CHICK , TypeOfGameobjects.DANCER, TypeOfGameobjects.DANCER , TypeOfGameobjects.DANCER};
+    public static  final  TypeOfGameObjects[] objectsToCreate = {TypeOfGameObjects.PLAYER,TypeOfGameObjects.PLAYER ,
+    TypeOfGameObjects.CHICK , TypeOfGameObjects.DANCER, TypeOfGameObjects.DANCER , TypeOfGameObjects.DANCER};
 
     static public final long delay = 25;
-    static public final int COLS = 80;
-    static public final int ROWS = 60;
+    static public final int COLS = 40;
+    static public final int ROWS = 25;
     private Grid gameGrid;
 
     private LinkedList<Collidable> mycollidabelObjects;
@@ -36,10 +36,14 @@ public class Game {
 
 
         LinkedList<Item> myItems = new LinkedList<Item>();
-        Item item = new Item(gameGrid.newGridPosition(20, 25));
+        Item item = new Item(gameGrid.newGridPosition(7,13),true);
+        Item beer = new Item(gameGrid.newGridPosition(10,12),false);
+        Item beer1 = new Item((gameGrid.newGridPosition(9,15)),false);
 
 
         myItems.add(item);
+        myItems.add(beer);
+        myItems.add(beer1);
 
 
         for (int i = 0 ; i < objectsToCreate.length ; i++){
@@ -54,7 +58,7 @@ public class Game {
     }
 
 
-    public void gamestart() throws InterruptedException {
+    public void gameStart() throws InterruptedException {
         while (true) {
 
 

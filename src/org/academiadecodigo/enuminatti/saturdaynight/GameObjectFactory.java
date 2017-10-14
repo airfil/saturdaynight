@@ -10,7 +10,7 @@ public class GameObjectFactory {
     public static Player myPlayer = null;
 
 
-    public static Collidable createObjects(TypeOfGameobjects type, Grid gameGrid) {
+    public static Collidable createObjects(TypeOfGameObjects type, Grid gameGrid) {
 
         Collidable gameobject = null;
 

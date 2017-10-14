@@ -8,7 +8,7 @@ public interface Collidable {
 
     public abstract GridPosition getPosition();
 
-    public abstract TypeOfGameobjects getType();
+    public abstract TypeOfGameObjects getType();
 
 //    public abstract void whenCollisionHappens();
 
