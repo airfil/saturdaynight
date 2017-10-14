@@ -60,24 +60,28 @@ public class CollisionDetector {
                         player.resetItems();
                         break;
                     case ITEM:
-
                         Item item = (Item) c;
-                        if(item.isItemStatus() == true) {
+                        if (item.isItemStatus() == true) {
                             item.itemRespawn();
                             player.addItemToPlayer();
+                            break;
                         }
-                        break;
-                    case DANCER:
-                        Dancer dancer = (Dancer) c;
-                        player.beingPushed(dancer.getPosition().getCurrentDirection());
+
+                        player.addConfidenceToPlayer();
                         break;
 
-                }
-
+                case DANCER:
+                    Dancer dancer = (Dancer) c;
+                    player.beingPushed(dancer.getPosition().getCurrentDirection());
+                    break;
 
             }
+
+
         }
     }
+
+}
 
 
     public void checkChickCollision(Chick chick) {

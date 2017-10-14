@@ -42,18 +42,16 @@ public class Game {
         Player player2 = new Player(gameGrid.newGridPostion(20, 20), 0);
 
         Item item = new Item(gameGrid.newGridPostion(20, 25),true);
+        Item beer = new Item(gameGrid.newGridPostion(26,28),false);
+
 
         Dancer dancer = new Dancer(gameGrid.newGridPostion(10, 10));
 
 
-        myCollidablelObjects = new Collidable[]{myChick, player1, player2, item, dancer};
+        myCollidablelObjects = new Collidable[]{myChick, player1, player2, item, dancer,};
         myCollisionDetector = new CollisionDetector(myCollidablelObjects);
 
-        beers = new Item[5];
-        for (int i=0; i < 5; i++){
 
-            beers[i] = new Item(gameGrid.newGridPostion(i+i,i+i),false);
-        }
 
 
     }
@@ -85,6 +83,7 @@ public class Game {
                         dancer.move();
                         myCollisionDetector.checkObjectColliding(dancer);
                         continue;
+
 
 
                 }

@@ -141,13 +141,18 @@ public class Player implements KeyboardHandler, Collidable {
         items++;
     }
     public void addConfidenceToPlayer(){
-        confidence += 5;
+        confidence +=5;
+        System.out.println(confidence);
     }
 
 
     @Override
     public GridPosition getPosition() {
         return pos;
+    }
+
+    public int getConfidence() {
+        return confidence;
     }
 
     public int getItems() {
