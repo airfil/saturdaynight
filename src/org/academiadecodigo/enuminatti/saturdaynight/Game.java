@@ -36,7 +36,7 @@ public class Game {
 
 
         LinkedList<Item> myItems = new LinkedList<Item>();
-        Item item = new Item(gameGrid.newGridPostion(20, 25));
+        Item item = new Item(gameGrid.newGridPosition(20, 25));
 
 
         myItems.add(item);
