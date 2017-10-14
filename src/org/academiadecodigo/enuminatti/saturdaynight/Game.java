@@ -12,7 +12,7 @@ public class Game {
     static public final int ROWS = 60;
     private Grid gameGrid;
 
-    private Collidable[] mycollidabelObjects;
+    private Collidable[] myCollidablelObjects;
     private CollisionDetector myCollisionDetector;
 
 
@@ -21,6 +21,8 @@ public class Game {
     private Player player2;
     private Item item;
     private Dancer dancer;
+    private Item[] beers;
+
 
 
     public Game() {
@@ -33,48 +35,53 @@ public class Game {
 
         gameGrid = new Grid(COLS, ROWS);
 
-        Chick mychick = new Chick(gameGrid.newGridPostion(25, 25));
-        mychick.setChickGrid(gameGrid);
+        Chick myChick = new Chick(gameGrid.newGridPostion(25, 25));
+        myChick.setChickGrid(gameGrid);
 
         Player player1 = new Player(gameGrid.newGridPostion(25, 25), 1);
         Player player2 = new Player(gameGrid.newGridPostion(20, 20), 0);
 
-        Item item = new Item(gameGrid.newGridPostion(20, 25));
+        Item item = new Item(gameGrid.newGridPostion(20, 25),true);
 
         Dancer dancer = new Dancer(gameGrid.newGridPostion(10, 10));
 
 
-        mycollidabelObjects = new Collidable[]{mychick, player1, player2, item,dancer};
-        myCollisionDetector = new CollisionDetector(mycollidabelObjects);
+        myCollidablelObjects = new Collidable[]{myChick, player1, player2, item, dancer};
+        myCollisionDetector = new CollisionDetector(myCollidablelObjects);
 
+        beers = new Item[5];
+        for (int i=0; i < 5; i++){
+
+            beers[i] = new Item(gameGrid.newGridPostion(i+i,i+i),false);
+        }
 
 
     }
 
 
-    public void gamestart() throws InterruptedException {
+    public void gameStart() throws InterruptedException {
         while (true) {
 
 
-            for (int i = 0; i < mycollidabelObjects.length; i++) {
-                System.out.println(mycollidabelObjects[i].getType());
+            for (int i = 0; i < myCollidablelObjects.length; i++) {
+                System.out.println(myCollidablelObjects[i].getType());
                 System.out.println(i);
-                switch (mycollidabelObjects[i].getType()) {
+                switch (myCollidablelObjects[i].getType()) {
 
                     case CHICK:
-                        Chick myChick = (Chick) mycollidabelObjects[i];
+                        Chick myChick = (Chick) myCollidablelObjects[i];
                         myChick.move();
                         myCollisionDetector.checkObjectColliding(myChick);
                         continue;
 
                     case PLAYER:
-                        Player myplayer = (Player) mycollidabelObjects[i];
+                        Player myplayer = (Player) myCollidablelObjects[i];
                         myplayer.accelarete();
                         myCollisionDetector.checkObjectColliding(myplayer);
                         continue;
 
                     case DANCER:
-                        Dancer dancer = (Dancer) mycollidabelObjects[i];
+                        Dancer dancer = (Dancer) myCollidablelObjects[i];
                         dancer.move();
                         myCollisionDetector.checkObjectColliding(dancer);
                         continue;

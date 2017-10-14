@@ -60,9 +60,12 @@ public class CollisionDetector {
                         player.resetItems();
                         break;
                     case ITEM:
+
                         Item item = (Item) c;
-                        item.itemrespawn();
-                        player.addItemToPlayer();
+                        if(item.isItemStatus() == true) {
+                            item.itemRespawn();
+                            player.addItemToPlayer();
+                        }
                         break;
                     case DANCER:
                         Dancer dancer = (Dancer) c;
@@ -86,7 +89,7 @@ public class CollisionDetector {
 
             if (col == c.getPosition().getCol() && row == c.getPosition().getRow()) {
 
-                if (c.getType() == TypeOfGameobjects.PLAYER) {
+                if (c.getType() == TypeOfGameObjects.PLAYER) {
 
                     Player player = (Player) c;
                     if (player.getItems() == 3) {
@@ -111,7 +114,7 @@ public class CollisionDetector {
 
             if (col == c.getPosition().getCol() && row == c.getPosition().getRow()) {
 
-                if (c.getType() == TypeOfGameobjects.PLAYER) {
+                if (c.getType() == TypeOfGameObjects.PLAYER) {
 
                     Player player = (Player) c;
                     player.beingPushed(dancer.getPosition().getCurrentDirection());

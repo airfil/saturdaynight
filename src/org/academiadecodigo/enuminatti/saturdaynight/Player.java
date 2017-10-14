@@ -7,15 +7,13 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
-import java.security.Key;
-
 /**
  * Created by codecadet on 09/10/17.
  */
 public class Player implements KeyboardHandler, Collidable {
 
     // CONSTANT the typeof this Gameobject will alwasys be a Player
-    public static final TypeOfGameobjects myType = TypeOfGameobjects.PLAYER;
+    public static final TypeOfGameObjects myType = TypeOfGameObjects.PLAYER;
 
     //Key binds for PlayerOne and PlayerTwo
     public static final int[] keyPlayer1 = {KeyboardEvent.KEY_LEFT,
@@ -38,6 +36,7 @@ public class Player implements KeyboardHandler, Collidable {
     //Player support proprities
     private int items = 0;
     private int moves = 0;
+    private int confidence = 0;
 
 
     public Player(GridPosition pos, int mycontroler) {
@@ -141,6 +140,9 @@ public class Player implements KeyboardHandler, Collidable {
     public void addItemToPlayer() {
         items++;
     }
+    public void addConfidenceToPlayer(){
+        confidence += 5;
+    }
 
 
     @Override
@@ -158,7 +160,7 @@ public class Player implements KeyboardHandler, Collidable {
     }
 
     @Override
-    public TypeOfGameobjects getType() {
+    public TypeOfGameObjects getType() {
         return myType;
     }
 

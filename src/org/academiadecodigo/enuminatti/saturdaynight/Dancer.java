@@ -9,11 +9,11 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
  */
 public class Dancer implements  Collidable{
 
-    public final static TypeOfGameobjects myType = TypeOfGameobjects.DANCER;
+    public final static TypeOfGameObjects myType = TypeOfGameObjects.DANCER;
 
     private int moves = 4;
     private int square = 1;
-    private TypeOfGameobjects mytype;
+    private TypeOfGameObjects mytype;
     private boolean squaredancing;
     private Grid dancerGrid;
     private GridPosition dancerPosition;
@@ -112,7 +112,7 @@ public class Dancer implements  Collidable{
     }
 
     @Override
-    public TypeOfGameobjects getType() {
+    public TypeOfGameObjects getType() {
         return myType;
     }
 

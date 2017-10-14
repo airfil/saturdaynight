@@ -9,11 +9,11 @@ import org.academiadecodigo.simplegraphics.graphics.Text;
  */
 public class Chick implements Collidable {
 
-    public static final TypeOfGameobjects myType = TypeOfGameobjects.CHICK;
+    public static final TypeOfGameObjects myType = TypeOfGameObjects.CHICK;
 
     private GridPosition chickPosition;
     private Rectangle chickRectangle;
-    private TypeOfGameobjects mytype;
+    private TypeOfGameObjects mytype;
     private Grid chickGrid;
     private int moves = 0;
 
@@ -21,7 +21,7 @@ public class Chick implements Collidable {
     public Chick(GridPosition chickPosition) {
 
         // Initializing this GameObject type as Chick
-        mytype = TypeOfGameobjects.CHICK;
+        mytype = TypeOfGameObjects.CHICK;
 
         //Getting position in rows
         this.chickPosition = chickPosition;
@@ -101,9 +101,9 @@ public class Chick implements Collidable {
 
         chickRectangle.delete();
 
-        Text endtext = new Text(Grid.WIDTH / 2, Grid.HEIGHT / 2, "End");
-        endtext.setColor(Color.RED);
-        endtext.draw();
+        Text endText = new Text(Grid.WIDTH / 2, Grid.HEIGHT / 2, "End");
+        endText.setColor(Color.RED);
+        endText.draw();
 
 
     }
@@ -114,7 +114,7 @@ public class Chick implements Collidable {
 
 
     @Override
-    public TypeOfGameobjects getType() {
+    public TypeOfGameObjects getType() {
         return mytype;
     }
 
