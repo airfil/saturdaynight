@@ -20,13 +20,13 @@ public class GameObjectFactory {
 
             case PLAYER:
                 if (myPlayer == null) {
-                    myPlayer = new Player(gameGrid.newGridPosition(25, 25), 1);
+                    myPlayer = new Player(gameGrid.newGridPosition(20,16 ), 1);
                     return myPlayer;
                 }
-                myPlayer = new Player(gameGrid.newGridPosition(22, 3), 2);
+                myPlayer = new Player(gameGrid.newGridPosition(20, 16), 2);
                 return myPlayer;
 
-            case CHICK:return new Chick(gameGrid.newGridPosition(25, 25));
+            case CHICK:return new Chick(gameGrid.newGridPosition(20, 16));
 
             default: return  null;
 
