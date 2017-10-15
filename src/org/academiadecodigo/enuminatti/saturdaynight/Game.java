@@ -1,6 +1,9 @@
 
 package org.academiadecodigo.enuminatti.saturdaynight;
 
+import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+
 import java.util.LinkedList;
 
 /**
@@ -14,9 +17,10 @@ public class Game {
     TypeOfGameObjects.CHICK , TypeOfGameObjects.DANCER, TypeOfGameObjects.DANCER , TypeOfGameObjects.DANCER};
 
     static public final long delay = 25;
-    static public final int COLS = 40;
-    static public final int ROWS = 25;
+    static public final int COLS = 32;
+    static public final int ROWS = 20;
     private Grid gameGrid;
+    private Grid screenGrid;
 
     private LinkedList<Collidable> mycollidabelObjects;
     private CollisionDetector myCollisionDetector;
@@ -32,8 +36,9 @@ public class Game {
 
         mycollidabelObjects = new LinkedList<Collidable>();
 
-        gameGrid = new Grid(COLS, ROWS);
+        gameGrid = new Grid(COLS,ROWS);
 
+        ScoreBoard myscoreboard = new ScoreBoard(gameGrid);
 
         LinkedList<Item> myItems = new LinkedList<Item>();
         Item item = new Item(gameGrid.newGridPosition(7,13),true);

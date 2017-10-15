@@ -8,6 +8,7 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 public class Grid {
 
     public static final int PADDING = 10;
+    public static final int PADDINGEXTRA = 20;
     public static final int CELLSIZE = 30;
     public static int HEIGHT; //rows * celsize
     public static int WIDTH; //cols * celsize
@@ -27,6 +28,7 @@ public class Grid {
         WIDTH = rows*CELLSIZE+PADDING;
 
     }
+
 
 
 
@@ -58,10 +60,17 @@ public class Grid {
         return  new GridPosition(this,0,25);
     }
 
+    public void rectangleMove(int i){
+
+        gameGrid.translate(0,i);
+
+    }
+
     public GridPosition newGridPosition(Grid gameGrid){
         return  new GridPosition(this);
     }
 
-
-
+    public Rectangle getGameGrid() {
+        return gameGrid;
+    }
 }

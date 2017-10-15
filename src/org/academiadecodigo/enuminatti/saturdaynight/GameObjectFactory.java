@@ -23,7 +23,7 @@ public class GameObjectFactory {
                     myPlayer = new Player(gameGrid.newGridPosition(25, 25), 1);
                     return myPlayer;
                 }
-                myPlayer = new Player(gameGrid.newGridPosition(25, 25), 2);
+                myPlayer = new Player(gameGrid.newGridPosition(22, 3), 2);
                 return myPlayer;
 
             case CHICK:return new Chick(gameGrid.newGridPosition(25, 25));
