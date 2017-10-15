@@ -198,6 +198,8 @@ public class CollisionDetector {
                         myChick.addItemtoChick();
                         System.out.println("Alerta Gaja bebada" + myChick.getBeer());
                         item.itemRespawn();
+
+                        //gaja boa 
                     }
                 }
 
