@@ -154,6 +154,9 @@ public class Player implements KeyboardHandler, Collidable {
     public int getConfidence() {
         return confidence;
     }
+    public void resetConfidence(){
+        confidence = 0;
+    }
 
     public int getItems() {
         return items;
