@@ -6,6 +6,7 @@ import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 /**
  * Created by codecadet on 09/10/17.
@@ -30,7 +31,7 @@ public class Player implements KeyboardHandler, Collidable {
 
     //Player Positon and Rectangle
     private GridPosition pos;
-    private Rectangle playerRectangle;
+    private Picture playerPicture;
 
 
     //Player support proprities
@@ -53,17 +54,15 @@ public class Player implements KeyboardHandler, Collidable {
         if (mycontroler == 1) {
 
             createKeyboards(keyPlayer1);
-            this.playerRectangle = new Rectangle(x, y, 30, 30);
-            this.playerRectangle.setColor(Color.BLUE);
-            this.playerRectangle.fill();
+            playerPicture = new Picture(x,y, "/player1face.png");
+            playerPicture.draw();
             return;
 
         }
 
         createKeyboards(keyPlayer2);
-        this.playerRectangle = new Rectangle(x, y, 30, 30);
-        this.playerRectangle.setColor(Color.RED);
-        this.playerRectangle.fill();
+        playerPicture = new Picture(x,y, "/player2face.png");
+        playerPicture.draw();
 
 
     }
@@ -105,7 +104,7 @@ public class Player implements KeyboardHandler, Collidable {
 
         int rowDirectionMov = pos.getCurrentDirection().row * Grid.CELLSIZE;
 
-        playerRectangle.translate(colDirectionMov, rowDirectionMov);
+        playerPicture.translate(colDirectionMov, rowDirectionMov);
 
         if (moves <= 0) {
             pos.setCurrentDirection(Direction.NODIRECTION);

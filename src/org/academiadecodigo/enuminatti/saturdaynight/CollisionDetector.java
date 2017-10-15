@@ -1,6 +1,8 @@
 package org.academiadecodigo.enuminatti.saturdaynight;
 
 
+import org.academiadecodigo.enuminatti.saturdaynight.utils.Sound;
+
 import java.util.LinkedList;
 
 /**
@@ -10,6 +12,9 @@ public class CollisionDetector {
 
     private LinkedList<Collidable> collidebels;
     private LinkedList<Item> myitems;
+    Sound beerSound = new Sound("/beerSound.wav");
+
+
 
     public CollisionDetector(LinkedList<Collidable> collidables, LinkedList<Item> myitems) {
         this.collidebels = collidables;
@@ -148,12 +153,14 @@ public class CollisionDetector {
 
                 if (myCollideble.getType() == TypeOfGameObjects.PLAYER) {
                     if (item.isItemStatus() == true) {
+                        beerSound.play(true);
                         System.out.println("estou a interagir");
                         Player myplayer = (Player) myCollideble;
                         myplayer.addItemToPlayer();
                         item.itemRespawn();
                         continue;
                     }
+                    beerSound.play(true);
                     System.out.println("Boa cerveja");
                     Player myplayer = (Player)  myCollideble;
                     myplayer.addConfidenceToPlayer();

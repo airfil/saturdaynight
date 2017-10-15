@@ -2,6 +2,7 @@ package org.academiadecodigo.enuminatti.saturdaynight;
 
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 /**
  * Created by codecadet on 09/10/17.
@@ -12,11 +13,11 @@ public class Item implements Collidable {
     public static final TypeOfGameObjects myType = TypeOfGameObjects.ITEM;
 
     private GridPosition itemPosition;
-    private Rectangle itemRectangle;
+    private Picture itemPicture;
     private boolean itemStatus;
 
 
-    public Item(GridPosition itemPosition,boolean itemType) {
+    public Item(GridPosition itemPosition, boolean itemType) {
 
         this.itemPosition = itemPosition;
         this.itemStatus = itemType;
@@ -25,20 +26,18 @@ public class Item implements Collidable {
         int y = itemPosition.getGameGrid().rowToY(itemPosition.getRow());
         if (itemType == false) {
 
-            this.itemRectangle = new Rectangle(x, y, Grid.CELLSIZE, Grid.CELLSIZE);
-            itemRectangle.setColor(Color.ORANGE);
-            itemRectangle.fill();
+            itemPicture = new Picture(x, y, "/cerveja2.png");
+            itemPicture.draw();
             return;
         }
-            this.itemRectangle = new Rectangle(x, y, Grid.CELLSIZE, Grid.CELLSIZE);
-            itemRectangle.setColor(Color.BLACK);
-            itemRectangle.fill();
+        itemPicture = new Picture(x, y, "/cerveja2.png");
+        itemPicture.draw();
 
-        }
+    }
 
     public void itemRespawn() {
 
-        itemRectangle.delete();
+        itemPicture.delete();
 
 
         itemPosition.setCol((int) Math.floor(Math.random() * itemPosition.getGameGrid().getCols() - 2));
@@ -47,13 +46,12 @@ public class Item implements Collidable {
         int x = itemPosition.getGameGrid().colToX(itemPosition.getCol());
         int y = itemPosition.getGameGrid().rowToY(itemPosition.getRow());
 
-        this.itemRectangle = new Rectangle(x, y, Grid.CELLSIZE, Grid.CELLSIZE);
-        if(this.itemStatus == false){
-            this.itemRectangle.setColor(Color.ORANGE);
+        itemPicture = new Picture(x, y, "/cerveja2.png");
+        if (this.itemStatus == false) {
+            this.itemPicture.draw();
         }
 
-        System.out.println(itemRectangle.getColor());
-        itemRectangle.fill();
+        itemPicture.draw();
 
     }
 
