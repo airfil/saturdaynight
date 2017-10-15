@@ -70,7 +70,6 @@ public class CollisionDetector {
                         Item item = (Item) c;
                         if(item.isItemStatus() == true) {
                             item.itemRespawn();
-                            player.addItemToPlayer();;
                             break;
                         }
                         break;
@@ -168,15 +167,15 @@ public class CollisionDetector {
             if (col == item.getPosition().getCol() && row == item.getPosition().getRow()) {
 
                 if (myCollideble.getType() == TypeOfGameObjects.PLAYER) {
+
+                    Player myplayer = (Player) myCollideble;
+
                     if (item.isItemStatus() == true) {
-                        System.out.println("item");
-                        Player myplayer = (Player) myCollideble;
                         myplayer.addItemToPlayer();
                         item.itemRespawn();
                         continue;
                     }
                     System.out.println("Boa cerveja");
-                    Player myplayer = (Player)  myCollideble;
                     myplayer.addConfidenceToPlayer();
                     item.itemRespawn();
 
