@@ -2,6 +2,7 @@ package org.academiadecodigo.enuminatti.saturdaynight;
 
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 /**
  * Created by codecadet on 09/10/17.
@@ -12,7 +13,7 @@ public class Item implements Collidable {
     public static final TypeOfGameObjects myType = TypeOfGameObjects.ITEM;
 
     private GridPosition itemPosition;
-    private Rectangle itemRectangle;
+    private Picture itemRectangle;
     private boolean itemStatus;
 
 
