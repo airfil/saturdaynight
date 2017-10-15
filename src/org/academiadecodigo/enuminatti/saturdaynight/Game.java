@@ -23,18 +23,19 @@ public class Game {
     private LinkedList<Collidable> mycollidabelObjects;
     private CollisionDetector myCollisionDetector;
 
-    Sound bailando = new Sound("/bailando.wav");
+    private TitleScreen menu;
 
+    Sound bailando = new Sound("/bailando2.wav");
+    Sound chickFail = new Sound("/chickFail.wav");
     public Game() {
 
-        init();
+        titleScreenController();
     }
 
 
     public void init() {
 
         mycollidabelObjects = new LinkedList<Collidable>();
-
 
         gameGrid = new Grid(COLS, ROWS);
 
@@ -57,12 +58,25 @@ public class Game {
 
         myCollisionDetector = new CollisionDetector(mycollidabelObjects, myItems);
 
+        try {
+            gameStart();
+        } catch (InterruptedException ex) {
+            System.out.println("RODAS");
+        }
 
+    }
+
+    public void titleScreenController() {
+        menu = new TitleScreen();
+        while (!menu.isPressed()) {
+            System.out.println("R");
+        }
+        init();
     }
 
 
     public void gameStart() throws InterruptedException {
-        //bailando.play(true);
+        bailando.play(true);
         while (true) {
 
 

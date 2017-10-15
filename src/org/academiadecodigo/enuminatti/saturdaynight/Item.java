@@ -40,8 +40,8 @@ public class Item implements Collidable {
         itemPicture.delete();
 
 
-        itemPosition.setCol((int) Math.floor(Math.random() * itemPosition.getGameGrid().getCols() - 2));
-        itemPosition.setRow((int) Math.floor(Math.random() * itemPosition.getGameGrid().getRows() - 2));
+        itemPosition.setCol((int) Math.floor(Math.random() * itemPosition.getGameGrid().getCols() ));
+        itemPosition.setRow((int) Math.floor(Math.random() * itemPosition.getGameGrid().getRows() ));
 
         int x = itemPosition.getGameGrid().colToX(itemPosition.getCol());
         int y = itemPosition.getGameGrid().rowToY(itemPosition.getRow());

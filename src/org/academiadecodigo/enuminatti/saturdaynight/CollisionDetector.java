@@ -12,8 +12,10 @@ public class CollisionDetector {
 
     private LinkedList<Collidable> collidebels;
     private LinkedList<Item> myitems;
-    Sound beerSound = new Sound("/beerSound.wav");
-
+    Sound beerSound = new Sound("/gluglu3.wav");
+    Sound chickFail = new Sound("/chickFail.wav");
+    Sound chickWin = new Sound("/faturaste.wav");
+    Sound dancerColide = new Sound("/saidaf.wav");
 
 
     public CollisionDetector(LinkedList<Collidable> collidables, LinkedList<Item> myitems) {
@@ -65,15 +67,20 @@ public class CollisionDetector {
                 switch (c.getType()) {
                     case CHICK:
                         Chick chick = (Chick) c;
-                        if (player.getItems() == 3) {
+                        if (player.getItems() == 5) {
+
                             chick.whenCollisionHappens();
                         }
                         player.resetItems();
                         break;
                     case ITEM:
                         Item item = (Item) c;
-                        item.itemRespawn();
-                        player.addItemToPlayer();
+                        if (item.isItemStatus() == true) {
+                            item.itemRespawn();
+                            player.addItemToPlayer();
+                            ;
+                            break;
+                        }
                         break;
 
                     case DANCER:
@@ -102,12 +109,31 @@ public class CollisionDetector {
                 if (c.getType() == TypeOfGameObjects.PLAYER) {
 
                     Player player = (Player) c;
+                    int chanceToWin3 = (int) (Math.random() * 100 + (player.getItems() * 5) + player.getConfidence());
+                    System.out.println(chanceToWin3);
+
+                    if (player.getItems() == 3) {
+                        if (chanceToWin3 > 90) {
+
+                            System.out.println(chanceToWin3);
+                            System.out.println(player.getItems() + chanceToWin3 + " " + player.getConfidence() + " vamos tentar");
+                            chickWin.play(true);
+                            chick.whenCollisionHappens();
+                            continue;
+                        }
+                        System.out.println("nao tas suficiente bebado");
+                        continue;
+
+                    }
                     if (player.getItems() == 5) {
+                        chickWin.play(true);
                         chick.whenCollisionHappens();
                         continue;
                     }
                     //if(random > 20 + player.baditem*5 + chick)
                     player.resetItems();
+                    player.resetConfidence();
+                    chickFail.play(true);
                     break;
 
                 }
@@ -130,6 +156,7 @@ public class CollisionDetector {
 
                     Player player = (Player) c;
                     player.beingPushed(dancer.getPosition().getCurrentDirection());
+                    dancerColide.play(true);
 
                 }
             }
@@ -162,7 +189,7 @@ public class CollisionDetector {
                     }
                     beerSound.play(true);
                     System.out.println("Boa cerveja");
-                    Player myplayer = (Player)  myCollideble;
+                    Player myplayer = (Player) myCollideble;
                     myplayer.addConfidenceToPlayer();
                     item.itemRespawn();
 
