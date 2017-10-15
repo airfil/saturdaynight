@@ -35,7 +35,7 @@ public class TitleScreen implements KeyboardHandler {
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
-        System.out.println("AIRES!");
+
         menuPicture.delete();
         pressed = true;
 
@@ -44,7 +44,7 @@ public class TitleScreen implements KeyboardHandler {
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
 
-        System.out.println("RODAS!");
+
         menuPicture.delete();
     }
 

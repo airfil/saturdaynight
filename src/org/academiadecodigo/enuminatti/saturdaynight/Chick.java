@@ -16,6 +16,7 @@ public class Chick implements Collidable {
     private TypeOfGameObjects mytype;
     private Grid chickGrid;
     private int moves = 0;
+    private int beer = 0;
 
 
     public Chick(GridPosition chickPosition) {
@@ -107,10 +108,17 @@ public class Chick implements Collidable {
 
     }
 
+    public void addItemtoChick(){
+        beer++;
+    }
+
     public GridPosition getChickPosition() {
         return chickPosition;
     }
 
+    public int getBeer() {
+        return beer;
+    }
 
     @Override
     public TypeOfGameObjects getType() {
