@@ -6,11 +6,9 @@ package org.academiadecodigo.enuminatti.saturdaynight;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
-        //Game newGame = new Game();
-        //newGame.gamestart();
+        Game newGame = new Game();
+        newGame.titleScreenController();
 
-        SplashScreen newSplashScreen = new SplashScreen();
-        newSplashScreen.init();
     }
 
 

@@ -14,21 +14,25 @@ public class Game {
     TypeOfGameobjects.CHICK , TypeOfGameobjects.DANCER, TypeOfGameobjects.DANCER , TypeOfGameobjects.DANCER};
 
     static public final long delay = 25;
-    static public final int COLS = 80;
-    static public final int ROWS = 60;
+    static public final int COLS = 32;
+    static public final int ROWS = 20;
     private Grid gameGrid;
 
     private LinkedList<Collidable> mycollidabelObjects;
     private CollisionDetector myCollisionDetector;
 
+    private TitleScreen menu;
+
 
     public Game() {
 
-        init();
+        titleScreenController();
     }
 
 
     public void init() {
+
+        System.out.println("RODAS VAI JOGAR TYPE AND FURIOUS");
 
         mycollidabelObjects = new LinkedList<Collidable>();
 
@@ -49,7 +53,20 @@ public class Game {
 
         myCollisionDetector = new CollisionDetector(mycollidabelObjects,myItems);
 
+        try {
+            gamestart();
+        } catch (InterruptedException ex) {
+            System.out.println("RODAS");
+        }
 
+    }
+
+    public void titleScreenController() {
+        menu = new TitleScreen();
+        while (!menu.isPressed()){
+            System.out.println("R");
+        }
+        init();
 
     }
 
@@ -59,8 +76,6 @@ public class Game {
 
 
             for (int i = 0; i < mycollidabelObjects.size(); i++) {
-                System.out.println(mycollidabelObjects.get(i).getType());
-                System.out.println(i);
                 switch (mycollidabelObjects.get(i).getType()) {
 
                     case CHICK:
