@@ -2,6 +2,7 @@ package org.academiadecodigo.enuminatti.saturdaynight;
 
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
 /**
@@ -17,7 +18,7 @@ public class Dancer implements Collidable {
     private boolean squaredancing;
     private Grid dancerGrid;
     private GridPosition dancerPosition;
-    private Rectangle dancerRectangle;
+    private Picture dancerPicture;
 
     public Dancer(GridPosition dancerPosition) {
 
@@ -29,9 +30,8 @@ public class Dancer implements Collidable {
         int x = dancerPosition.getGameGrid().colToX(dancerPosition.getCol());
         int y = dancerPosition.getGameGrid().rowToY(dancerPosition.getRow());
 
-        dancerRectangle = new Rectangle(x, y, Grid.CELLSIZE, Grid.CELLSIZE);
-        dancerRectangle.setColor(Color.GREEN);
-        dancerRectangle.fill();
+        dancerPicture = new Picture(x, y, "/dancer.png");
+        dancerPicture.draw();
         dancerPosition.setCurrentDirection(Direction.UP);
         squaredancing = true;
 
@@ -99,7 +99,7 @@ public class Dancer implements Collidable {
         int colDirectionMov = dancerPosition.getCurrentDirection().col * Grid.CELLSIZE;
         int rowDirectionMov = dancerPosition.getCurrentDirection().row * Grid.CELLSIZE;
 
-        dancerRectangle.translate(colDirectionMov, rowDirectionMov);
+        dancerPicture.translate(colDirectionMov, rowDirectionMov);
 
     }
 

@@ -12,15 +12,35 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 public class TitleScreen implements KeyboardHandler {
 
     private boolean pressed;
-    private Picture menuPicture;
+    private Picture menuPictureOne;
+    private Picture menuPictureTwo;
     private Keyboard menuKeyboard;
     private KeyboardEvent menuKeyboardEvent;
     public static final int[] menuKeys = {KeyboardEvent.KEY_SPACE};
 
     public TitleScreen() {
-        menuPicture = new Picture (Grid.PADDING,Grid.PADDING, "/floor.png");
-        menuPicture.draw();
+
         createKeyboard();
+        menuSlide();
+        menuPictureOne.draw();
+    }
+
+    public void menuSlide() {
+        menuPictureOne = new Picture (Grid.PADDING,Grid.PADDING, "/titleScreen1.png");
+        menuPictureTwo = new Picture(Grid.PADDING,Grid.PADDING, "/titleScreen2.png");
+        menuPictureTwo.draw();
+        menuPictureOne.draw();
+        while (!pressed) {
+            try {
+                menuPictureOne.delete();
+                Thread.sleep(300);
+                menuPictureOne.draw();
+                Thread.sleep(300);
+
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     public void createKeyboard() {
@@ -36,7 +56,7 @@ public class TitleScreen implements KeyboardHandler {
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
         System.out.println("AIRES!");
-        menuPicture.delete();
+        menuPictureOne.delete();
         pressed = true;
 
     }
@@ -44,8 +64,8 @@ public class TitleScreen implements KeyboardHandler {
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
 
-        System.out.println("RODAS!");
-        menuPicture.delete();
+        menuPictureOne.delete();
+        menuPictureTwo.delete();
     }
 
     public boolean isPressed() {
