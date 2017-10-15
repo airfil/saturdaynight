@@ -62,15 +62,16 @@ public class CollisionDetector {
                     case CHICK:
                         Chick chick = (Chick) c;
                         if (player.getItems() == 5) {
-                        chick.whenCollisionHappens();
+                            chick.whenCollisionHappens();
                         }
                         player.resetItems();
                         break;
                     case ITEM:
                         Item item = (Item) c;
-                        if(item.isItemStatus() == true) {
+                        if (item.isItemStatus() == true) {
                             item.itemRespawn();
-                            player.addItemToPlayer();;
+                            player.addItemToPlayer();
+                            ;
                             break;
                         }
                         break;
@@ -99,45 +100,27 @@ public class CollisionDetector {
             if (col == c.getPosition().getCol() && row == c.getPosition().getRow()) {
 
                 if (c.getType() == TypeOfGameObjects.PLAYER) {
-
                     Player player = (Player) c;
                     int chanceToWin3 = (int) (Math.random() * 100 + (player.getItems() * 5) + player.getConfidence() + chick.getBeer() * 3);
-                    System.out.println(chanceToWin3);
+                    if (player.getItems() == 5) {
+
+                        chick.whenCollisionHappens();
+                        continue;
+
+                    }
 
                     if (player.getItems() == 3) {
+
                         if (chanceToWin3 > 90) {
 
-                            System.out.println(chanceToWin3);
-                            System.out.println(player.getItems()+ chanceToWin3 + " " + player.getConfidence() + " vamos tentar");
                             chick.whenCollisionHappens();
                             continue;
                         }
-                        System.out.println("nao tas suficiente bebado");
-                        continue;
-
                     }
-                    if (player.getItems() == 5) {
-                        chick.whenCollisionHappens();
-                        continue;
-                    }
-
-                    System.out.println("reset aos items");
                     player.resetItems();
                     player.resetConfidence();
                     break;
-
                 }
-                if (c.getType() == TypeOfGameObjects.ITEM) {
-                    Item item = (Item) c;
-
-                    if (item.isItemStatus() == false) {
-
-                        item.itemRespawn();
-                        chick.addItemtoChick();
-                        break;
-                    }
-                }
-
             }
         }
     }
@@ -177,38 +160,42 @@ public class CollisionDetector {
 
             if (col == item.getPosition().getCol() && row == item.getPosition().getRow()) {
 
-                if (myCollideble.getType() == TypeOfGameObjects.PLAYER) {
+                switch (myCollideble.getType()) {
 
-                    Player myplayer = (Player) myCollideble;
+                    case PLAYER:
 
-                    if (item.isItemStatus() == true) {
-                        myplayer.addItemToPlayer();
+                        Player myplayer = (Player) myCollideble;
+
+                        if (item.isItemStatus() == true) {
+
+                            myplayer.addItemToPlayer();
+                            item.itemRespawn();
+                            continue;
+
+                        }
+
+                        myplayer.addConfidenceToPlayer();
                         item.itemRespawn();
-                        continue;
-                    }
-                    System.out.println("Boa cerveja");
-                    Player myplayer = (Player)  myCollideble;
-                    myplayer.addConfidenceToPlayer();
-                    item.itemRespawn();
+                        break;
 
-                }
-                if (myCollideble.getType() == TypeOfGameObjects.CHICK) {
 
-                    if (item.isItemStatus() == false) {
+                    case CHICK:
 
                         Chick myChick = (Chick) myCollideble;
-                        myChick.addItemtoChick();
-                        System.out.println("Alerta Gaja bebada" + myChick.getBeer());
-                        item.itemRespawn();
 
-                        //gaja boa
-                    }
+                        if (item.isItemStatus() == false) {
+
+                            myChick.addItemtoChick();
+                            item.itemRespawn();
+
+                        }
+                        break;
+
+
                 }
 
 
             }
-
-
         }
     }
 }
