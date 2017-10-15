@@ -100,15 +100,15 @@ public class CollisionDetector {
 
                 if (c.getType() == TypeOfGameObjects.PLAYER) {
 
-
                     Player player = (Player) c;
-                    int chanceToWin3 = (int) Math.random() + (player.getItems() * 5)  +  player.getConfidence();
+                    int chanceToWin3 = (int) (Math.random() *100 + (player.getItems() * 5)  +  player.getConfidence());
+                    System.out.println(chanceToWin3);
 
                     if (player.getItems() == 3){
-                        if(chanceToWin3 > 90){
+                        if(chanceToWin3 > 1){
 
                             System.out.println(chanceToWin3);
-                            System.out.println(player.getItems() + " " + player.getConfidence() + " vamos tentar");
+                            System.out.println(player.getItems()+ chanceToWin3 + " " + player.getConfidence() + " vamos tentar");
                             chick.whenCollisionHappens();
                             continue;
                         }
@@ -121,6 +121,7 @@ public class CollisionDetector {
                         continue;
                     }
 
+                    System.out.println("reset aos items");
                     player.resetItems();
                     player.resetConfidence();
                     break;
