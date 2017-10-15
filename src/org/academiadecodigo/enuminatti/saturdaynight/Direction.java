@@ -20,22 +20,24 @@ public enum Direction {
         this.row = row;
     }
 
-    static public Direction oppositeDirection(Direction myDirection) {
+    static public Direction randomDirection() {
 
+        int random = (int) (Math.random() * 4);
+        Direction myDirection = values()[random];
 
         switch (myDirection) {
 
             case RIGTH:
-                return Direction.LEFT;
+                return Direction.RIGTH;
 
             case UP:
-                return Direction.DOWN;
-
-            case DOWN:
                 return Direction.UP;
 
+            case DOWN:
+                return Direction.DOWN;
+
             case LEFT:
-                return Direction.RIGTH;
+                return Direction.LEFT;
 
             default:
                 return Direction.NODIRECTION;
@@ -45,20 +47,25 @@ public enum Direction {
 
     }
 
-    static public Direction angleDirection(Direction myDirection ){
+    static public Direction angleDirection(Direction myDirection) {
 
 
-        switch (myDirection){
+        switch (myDirection) {
 
-            case RIGTH:return Direction.DOWN;
+            case RIGTH:
+                return Direction.DOWN;
 
-            case UP: return Direction.RIGTH;
+            case UP:
+                return Direction.RIGTH;
 
-            case DOWN:return Direction.LEFT;
+            case DOWN:
+                return Direction.LEFT;
 
-            case LEFT:return Direction.UP;
+            case LEFT:
+                return Direction.UP;
 
-            default:return  Direction.NODIRECTION;
+            default:
+                return Direction.NODIRECTION;
 
         }
 

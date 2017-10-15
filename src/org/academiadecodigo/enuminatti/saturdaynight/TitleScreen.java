@@ -17,7 +17,6 @@ public class TitleScreen implements KeyboardHandler {
     private Keyboard menuKeyboard;
     private KeyboardEvent menuKeyboardEvent;
     private boolean instructionsRead;
-    public static final int[] menuKeys = {KeyboardEvent.KEY_SPACE};
     private Picture instructions;
 
     public TitleScreen() {
@@ -27,11 +26,13 @@ public class TitleScreen implements KeyboardHandler {
     }
 
     public void menuSlide() {
+
         menuPictureOne = new Picture(Grid.PADDING, Grid.PADDING, "resources/titleScreen1.png");
         menuPictureTwo = new Picture(Grid.PADDING, Grid.PADDING, "resources/titleScreen2.png");
         instructions = new Picture(Grid.PADDING, Grid.PADDING, "resources/instructionsScreen.png");
         menuPictureTwo.draw();
         menuPictureOne.draw();
+
         while (!pressed) {
             try {
                 menuPictureOne.delete();
@@ -43,11 +44,12 @@ public class TitleScreen implements KeyboardHandler {
                 ex.printStackTrace();
             }
         }
+
         pressed = false;
         menuPictureOne.delete();
         menuPictureTwo.delete();
-
         instructions.draw();
+
         while (!pressed) {
             try {
                 Thread.sleep(300);
@@ -56,14 +58,15 @@ public class TitleScreen implements KeyboardHandler {
             }
 
         }
+
         instructions.delete();
         instructionsRead = true;
-
 
 
     }
 
     public void createKeyboard() {
+
         menuKeyboard = new Keyboard(this);
         menuKeyboardEvent = new KeyboardEvent();
         menuKeyboardEvent.setKey(KeyboardEvent.KEY_SPACE);

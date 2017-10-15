@@ -9,7 +9,7 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
  */
 public class Item implements Collidable {
 
-    // CONSTANT the typeof this Gameobject will alwasys be a Item
+    // CONSTANT the typeof this GameObject will always be a Item
     public static final TypeOfGameObjects myType = TypeOfGameObjects.ITEM;
 
     private GridPosition itemPosition;
@@ -39,9 +39,8 @@ public class Item implements Collidable {
 
         itemPicture.delete();
 
-
-        itemPosition.setCol((int) Math.floor(Math.random() * itemPosition.getGameGrid().getCols() ));
-        itemPosition.setRow((int) Math.floor(Math.random() * itemPosition.getGameGrid().getRows() ));
+        itemPosition.setCol((int) Math.floor(Math.random() * itemPosition.getGameGrid().getCols()));
+        itemPosition.setRow((int) Math.floor(Math.random() * itemPosition.getGameGrid().getRows()));
 
         int x = itemPosition.getGameGrid().colToX(itemPosition.getCol());
         int y = itemPosition.getGameGrid().rowToY(itemPosition.getRow());
@@ -63,10 +62,6 @@ public class Item implements Collidable {
     @Override
     public TypeOfGameObjects getType() {
         return myType;
-    }
-
-    public GridPosition getItemPosition() {
-        return itemPosition;
     }
 
     @Override

@@ -7,7 +7,7 @@ public enum TypeOfGameObjects {
     CHICK,
     PLAYER,
     DANCER,
-    ITEM;
+    ITEM
 }
 
 

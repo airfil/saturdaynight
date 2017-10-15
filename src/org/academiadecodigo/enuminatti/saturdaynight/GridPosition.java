@@ -27,9 +27,9 @@ public class GridPosition {
     public GridPosition(Grid gameGrid) {
 
         //Generating random col and row
-        this.col = (int) Math.ceil(Math.random() * gameGrid.getCols() - 2);
+        this.col = (int) Math.ceil(Math.random() * (gameGrid.getCols() - 1));
 
-        this.row = (int) Math.ceil(Math.random() * gameGrid.getRows() - 2);
+        this.row = (int) Math.ceil(Math.random() * (gameGrid.getRows() - 1));
 
 
         //The gameGrid of this position
@@ -41,16 +41,16 @@ public class GridPosition {
 
     }
 
-    public GridPosition(Grid gameGrid, int miny, int maxy) {
+    public GridPosition(Grid gameGrid, int minY, int maxY) {
 
         //Generating random col and row
-        int rangex = (gameGrid.getCols() - 1 - 2) + 1;
-        this.col = (int) Math.ceil(Math.random() * rangex) + 1;
+        int rangeX = (gameGrid.getCols() - 1 - 2) + 1;
+        this.col = (int) Math.ceil(Math.random() * rangeX) + 1;
 
 
         // Generating a y with range , for the first item to appear on the upside of the screen
-        int range = (maxy - miny) + 1;
-        this.row = (int) Math.ceil(Math.random() * range) + miny;
+        int rangeY = (maxY - minY) + 1;
+        this.row = (int) Math.ceil(Math.random() * rangeY) + minY;
 
 
         //The gameGrid of this position

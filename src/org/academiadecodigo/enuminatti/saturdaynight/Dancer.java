@@ -1,6 +1,5 @@
 package org.academiadecodigo.enuminatti.saturdaynight;
 
-import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
@@ -14,7 +13,7 @@ public class Dancer implements Collidable {
     private int moves = 4;
     private int square = 1;
     private TypeOfGameObjects mytype;
-    private boolean squaredancing;
+    private boolean squareDancing;
     private GridPosition dancerPosition;
     private Picture dancerPicture;
 
@@ -30,8 +29,8 @@ public class Dancer implements Collidable {
 
         dancerPicture = new Picture(x, y, "resources/dancer.png");
         dancerPicture.draw();
-        dancerPosition.setCurrentDirection(Direction.UP);
-        squaredancing = true;
+        dancerPosition.setCurrentDirection(Direction.randomDirection());
+        squareDancing = true;
 
     }
 
@@ -40,24 +39,24 @@ public class Dancer implements Collidable {
 
         Direction dancerdirection = dancerPosition.getCurrentDirection();
 
-        if (squaredancing && moves == 0) {
+        if (squareDancing && moves == 0) {
             dancerPosition.setCurrentDirection(Direction.angleDirection(dancerdirection));
             moves = 3;
             square++;
-            squaredancing = true;
+            squareDancing = true;
         }
 
         if (square == 4) {
-            squaredancing = false;
+            squareDancing = false;
         }
 
-        if (!squaredancing && moves == 0) {
+        if (!squareDancing && moves == 0) {
 
             int random = (int) Math.ceil(Math.random() * 100);
 
             if (random <= 60) {
                 moves = 4;
-                squaredancing = true;
+                squareDancing = true;
                 square = 0;
             }
             dancerPosition.createRandomDirection();

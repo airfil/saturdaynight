@@ -1,8 +1,5 @@
 package org.academiadecodigo.enuminatti.saturdaynight;
 
-import org.academiadecodigo.simplegraphics.graphics.Color;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
-import org.academiadecodigo.simplegraphics.graphics.Text;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
@@ -14,7 +11,7 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
  */
 public class Player implements KeyboardHandler, Collidable {
 
-    // CONSTANT the typeof this Gameobject will alwasys be a Player
+    // CONSTANT the typeof this GameObject will always be a Player
     public static final TypeOfGameObjects myType = TypeOfGameObjects.PLAYER;
 
     //Key binds for PlayerOne and PlayerTwo
@@ -25,36 +22,36 @@ public class Player implements KeyboardHandler, Collidable {
             KeyboardEvent.KEY_D, KeyboardEvent.KEY_S, KeyboardEvent.KEY_W};
 
 
-    // Keyboard Related Proprety's
+    // Keyboard related properties
     private Keyboard playerKeyboard;
-    KeyboardEvent[] pOneKeyboardEvents;
+    private KeyboardEvent[] pOneKeyboardEvents;
 
 
-    //Player Positon and Rectangle
-    private GridPosition pos;
+    //Player Position and Rectangle
+    private GridPosition gridPosition;
     private Picture playerPicture;
-    private Picture[] berrs ;
-    private Picture[] myitems ;
+    private Picture[] beers;
+    private Picture[] myItems;
 
 
-    //Player support proprities
+    //Player support properties
     private int items = 0;
     private int moves = 0;
     private int confidence = 0;
 
 
-    public Player(GridPosition pos, int mycontroler) {
+    public Player(GridPosition gridPosition, int myController) {
 
-        //Initializng the pos of the player
-        this.pos = pos;
-        int x = pos.getGameGrid().colToX(pos.getCol());
-        int y = pos.getGameGrid().rowToY(pos.getRow());
+        //Initializng the gridPosition of the player
+        this.gridPosition = gridPosition;
+        int x = gridPosition.getGameGrid().colToX(gridPosition.getCol());
+        int y = gridPosition.getGameGrid().rowToY(gridPosition.getRow());
 
         //Giving initial direction to the player
-        this.pos.setCurrentDirection(Direction.NODIRECTION);
+        this.gridPosition.setCurrentDirection(Direction.NODIRECTION);
 
 
-        if (mycontroler == 1) {
+        if (myController == 1) {
 
             createKeyboards(keyPlayer1);
             this.playerPicture = new Picture(x, y, "resources/playerOne.png");
@@ -94,7 +91,7 @@ public class Player implements KeyboardHandler, Collidable {
     public void beingPushed(Direction newDirection) {
 
 
-        pos.setCurrentDirection(newDirection);
+        gridPosition.setCurrentDirection(newDirection);
 
         moves = 3;
         accelarete();
@@ -106,14 +103,14 @@ public class Player implements KeyboardHandler, Collidable {
 
         checkInLimmits();
 
-        int colDirectionMov = pos.getCurrentDirection().col * Grid.CELLSIZE;
+        int colDirectionMov = gridPosition.getCurrentDirection().col * Grid.CELLSIZE;
 
-        int rowDirectionMov = pos.getCurrentDirection().row * Grid.CELLSIZE;
+        int rowDirectionMov = gridPosition.getCurrentDirection().row * Grid.CELLSIZE;
 
         playerPicture.translate(colDirectionMov, rowDirectionMov);
 
         if (moves <= 0) {
-            pos.setCurrentDirection(Direction.NODIRECTION);
+            gridPosition.setCurrentDirection(Direction.NODIRECTION);
         }
 
         moves--;
@@ -123,19 +120,19 @@ public class Player implements KeyboardHandler, Collidable {
 
     public void checkInLimmits() {
 
-        switch (pos.getCurrentDirection()) {
+        switch (gridPosition.getCurrentDirection()) {
 
             case UP:
-                pos.moveUp();
+                gridPosition.moveUp();
                 break;
             case DOWN:
-                pos.moveDown();
+                gridPosition.moveDown();
                 break;
             case RIGTH:
-                pos.moveRigth();
+                gridPosition.moveRigth();
                 break;
             case LEFT:
-                pos.moveLeft();
+                gridPosition.moveLeft();
                 break;
 
 
@@ -144,73 +141,71 @@ public class Player implements KeyboardHandler, Collidable {
 
     public void addItemToPlayer() {
 
-        if(items < 5){
+        if (items < 5) {
             items++;
-            myitems[items-1].draw();
+            myItems[items - 1].draw();
         }
 
 
     }
-    public void addConfidenceToPlayer(){
 
-        if(confidence < 9){
-            confidence +=3;
-            berrs[(confidence/3)-1].draw();
+    public void addConfidenceToPlayer() {
+
+        if (confidence < 9) {
+            confidence += 3;
+            beers[(confidence / 3) - 1].draw();
         }
-
 
 
     }
 
-    public void playerTwoInitializingPictures(){
+    public void playerTwoInitializingPictures() {
 
-       myitems = new Picture[5];
-       berrs = new Picture[3];
+        myItems = new Picture[5];
+        beers = new Picture[3];
 
-        for (int i = 0; i < myitems.length; i++) {
-            myitems[i] = new Picture((4+i)*Grid.CELLSIZE ,20* Grid.CELLSIZE ,"resources/item.png");
+        for (int i = 0; i < myItems.length; i++) {
+            myItems[i] = new Picture((4 + i) * Grid.CELLSIZE, 20 * Grid.CELLSIZE, "resources/item.png");
 
         }
 
-        for (int j = 0; j < berrs.length ; j++) {
-            berrs[j] = new Picture((4+j)*Grid.CELLSIZE ,22* Grid.CELLSIZE ,"resources/cerveja2.png");
+        for (int j = 0; j < beers.length; j++) {
+            beers[j] = new Picture((4 + j) * Grid.CELLSIZE, 22 * Grid.CELLSIZE, "resources/cerveja2.png");
 
         }
     }
 
-    public void playerOneInitializingPictures(){
+    public void playerOneInitializingPictures() {
 
-        myitems = new Picture[5];
-        berrs = new Picture[3];
+        myItems = new Picture[5];
+        beers = new Picture[3];
 
         for (int i = 4; i >= 0; i--) {
-            myitems[i] = new Picture((27-i)*Grid.CELLSIZE ,20* Grid.CELLSIZE ,"resources/item.png");
+            myItems[i] = new Picture((27 - i) * Grid.CELLSIZE, 20 * Grid.CELLSIZE, "resources/item.png");
 
         }
 
-        for (int j = 2; j >= 0 ; j--) {
-            berrs[j] = new Picture((27-j)*Grid.CELLSIZE ,22* Grid.CELLSIZE ,"resources/cerveja2.png");
+        for (int j = 2; j >= 0; j--) {
+            beers[j] = new Picture((27 - j) * Grid.CELLSIZE, 22 * Grid.CELLSIZE, "resources/cerveja2.png");
 
         }
     }
-
-
-
 
 
     @Override
     public GridPosition getPosition() {
-        return pos;
+        return gridPosition;
     }
 
     public int getConfidence() {
         return confidence;
     }
-    public void resetConfidence(){
-        confidence = 0;
-        for (int i = 0; i < berrs.length ; i++) {
 
-            berrs[i].delete();
+    public void resetConfidence() {
+        confidence = 0;
+        for (int i = 0; i < beers.length; i++) {
+
+            beers[i].delete();
         }
     }
 
@@ -221,9 +216,9 @@ public class Player implements KeyboardHandler, Collidable {
 
     public void resetItems() {
         items = 0;
-        for (int i = 0; i < myitems.length ; i++) {
+        for (int i = 0; i < myItems.length; i++) {
 
-            myitems[i].delete();
+            myItems[i].delete();
         }
     }
 
@@ -238,46 +233,44 @@ public class Player implements KeyboardHandler, Collidable {
 
         if (moves != 0) {
 
-           // System.out.println("Player: " + items);
-
             if (keyboardEvent.getKey() == KeyboardEvent.KEY_UP) {
 
-                pos.setCurrentDirection(Direction.UP);
+                gridPosition.setCurrentDirection(Direction.UP);
 
             }
 
             if (keyboardEvent.getKey() == KeyboardEvent.KEY_DOWN) {
 
-                pos.setCurrentDirection(Direction.DOWN);
+                gridPosition.setCurrentDirection(Direction.DOWN);
             }
 
             if (keyboardEvent.getKey() == keyboardEvent.KEY_RIGHT) {
 
-                pos.setCurrentDirection(Direction.RIGTH);
+                gridPosition.setCurrentDirection(Direction.RIGTH);
             }
 
             if (keyboardEvent.getKey() == keyboardEvent.KEY_LEFT) {
 
-                pos.setCurrentDirection(Direction.LEFT);
+                gridPosition.setCurrentDirection(Direction.LEFT);
             }
 
             if (keyboardEvent.getKey() == keyboardEvent.KEY_W) {
-                pos.setCurrentDirection(Direction.UP);
+                gridPosition.setCurrentDirection(Direction.UP);
             }
 
             if (keyboardEvent.getKey() == keyboardEvent.KEY_S) {
 
-                pos.setCurrentDirection(Direction.DOWN);
+                gridPosition.setCurrentDirection(Direction.DOWN);
             }
 
             if (keyboardEvent.getKey() == keyboardEvent.KEY_A) {
 
-                pos.setCurrentDirection(Direction.LEFT);
+                gridPosition.setCurrentDirection(Direction.LEFT);
             }
 
             if (keyboardEvent.getKey() == keyboardEvent.KEY_D) {
 
-                pos.setCurrentDirection(Direction.RIGTH);
+                gridPosition.setCurrentDirection(Direction.RIGTH);
             }
         }
     }

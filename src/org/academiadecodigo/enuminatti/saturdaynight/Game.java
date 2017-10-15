@@ -21,7 +21,7 @@ public class Game {
     static public final int ROWS = 18;
     private Grid gameGrid;
 
-    private LinkedList<Collidable> mycollidabelObjects;
+    private LinkedList<Collidable> myCollidabelObjects;
     private CollisionDetector myCollisionDetector;
 
     private TitleScreen menu;
@@ -36,15 +36,15 @@ public class Game {
 
     public void init() {
 
-        mycollidabelObjects = new LinkedList<Collidable>();
+        myCollidabelObjects = new LinkedList<Collidable>();
 
         gameGrid = new Grid(COLS, ROWS);
 
 
         LinkedList<Item> myItems = new LinkedList<Item>();
-        Item item = new Item(gameGrid.newGridPosition(7,13),true);
-        Item beer = new Item(gameGrid.newGridPosition(10,12),false);
-        Item beer1 = new Item((gameGrid.newGridPosition(9,15)),false);
+        Item item = new Item(gameGrid.newGridPosition(7, 13), true);
+        Item beer = new Item(gameGrid.newGridPosition(10, 12), false);
+        Item beer1 = new Item((gameGrid.newGridPosition(9, 15)), false);
 
 
         myItems.add(item);
@@ -52,15 +52,15 @@ public class Game {
         myItems.add(beer1);
 
 
-        for (int i = 0 ; i < objectsToCreate.length ; i++){
-           Collidable mygameobject =  GameObjectFactory.createObjects(objectsToCreate[i],gameGrid);
-            mycollidabelObjects.add(mygameobject);
+        for (int i = 0; i < objectsToCreate.length; i++) {
+            Collidable myGameObjects = GameObjectFactory.createObjects(objectsToCreate[i], gameGrid);
+            myCollidabelObjects.add(myGameObjects);
         }
 
-        myCollisionDetector = new CollisionDetector(mycollidabelObjects,myItems);
+        myCollisionDetector = new CollisionDetector(myCollidabelObjects, myItems);
 
         try {
-            gamestart();
+            gameStart();
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
@@ -68,6 +68,7 @@ public class Game {
     }
 
     public void titleScreenController() {
+
         bailando.play(true);
         menu = new TitleScreen();
         while (!menu.isInstructionsRead()) {
@@ -77,44 +78,37 @@ public class Game {
     }
 
 
-    public void gamestart() throws InterruptedException {
+    public void gameStart() throws InterruptedException {
         while (true) {
 
-            for (int i = 0; i < mycollidabelObjects.size(); i++) {
+            for (int i = 0; i < myCollidabelObjects.size(); i++) {
 
-                switch (mycollidabelObjects.get(i).getType()) {
+                switch (myCollidabelObjects.get(i).getType()) {
 
                     case CHICK:
-                        Chick myChick = (Chick) mycollidabelObjects.get(i);
+                        Chick myChick = (Chick) myCollidabelObjects.get(i);
                         myChick.move();
                         myCollisionDetector.checkObjectColliding(myChick);
                         break;
 
                     case PLAYER:
-                        Player myplayer = (Player)mycollidabelObjects.get(i);
-                        myplayer.accelarete();
-                        myCollisionDetector.checkObjectColliding(myplayer);
+                        Player myPlayer = (Player) myCollidabelObjects.get(i);
+                        myPlayer.accelarete();
+                        myCollisionDetector.checkObjectColliding(myPlayer);
                         break;
 
                     case DANCER:
-                        Dancer dancer = (Dancer) mycollidabelObjects.get(i);
+                        Dancer dancer = (Dancer) myCollidabelObjects.get(i);
                         dancer.move();
                         myCollisionDetector.checkObjectColliding(dancer);
                         break;
-
-
                 }
-
 
                 Thread.sleep(delay);
 
-
             }
         }
-
-
     }
-
 }
 
 

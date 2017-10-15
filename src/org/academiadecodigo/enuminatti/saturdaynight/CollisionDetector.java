@@ -10,17 +10,19 @@ import java.util.LinkedList;
  */
 public class CollisionDetector {
 
-    private LinkedList<Collidable> collidebels;
-    private LinkedList<Item> myitems;
-    Sound beerSound = new Sound("/resources/gluglu3.wav");
-    Sound chickFail = new Sound("/resources/chickFail.wav");
-    Sound chickWin = new Sound("/resources/faturaste.wav");
-    Sound dancerColide = new Sound("/resources/saidaf.wav");
+    private LinkedList<Collidable> collidables;
+    private LinkedList<Item> myItems;
+    private Sound beerSound = new Sound("/resources/gluglu3.wav");
+    private Sound chickFail = new Sound("/resources/chickFail.wav");
+    private Sound chickWin = new Sound("/resources/jafaturaste.wav");
+    private Sound dancerCollide = new Sound("/resources/saidaf.wav");
+    private Sound itemSound = new Sound("/resources/catchinga.wav");
 
 
-    public CollisionDetector(LinkedList<Collidable> collidables, LinkedList<Item> myitems) {
-        this.collidebels = collidables;
-        this.myitems = myitems;
+
+    public CollisionDetector(LinkedList<Collidable> collidables, LinkedList<Item> myItems) {
+        this.collidables = collidables;
+        this.myItems = myItems;
     }
 
     public void checkObjectColliding(Collidable objChecking) {
@@ -29,14 +31,13 @@ public class CollisionDetector {
 
         switch (objChecking.getType()) {
 
-
             case CHICK:
                 Chick chick = (Chick) objChecking;
                 checkChickCollision(chick);
                 break;
             case PLAYER:
                 Player player = (Player) objChecking;
-                checkPlayerCollison(player);
+                checkPlayerCollision(player);
                 break;
             case DANCER:
                 Dancer dancer = (Dancer) objChecking;
@@ -51,8 +52,8 @@ public class CollisionDetector {
     }
 
 
-    public void checkPlayerCollison(Player player) {
-        for (Collidable c : collidebels) {
+    public void checkPlayerCollision(Player player) {
+        for (Collidable c : collidables) {
 
             if (player == c) {
                 continue;
@@ -75,9 +76,9 @@ public class CollisionDetector {
                         break;
                     case ITEM:
                         Item item = (Item) c;
-                        if(item.isItemStatus() == true) {
+                        if (item.isItemStatus() == true) {
                             item.itemRespawn();
-                            player.addItemToPlayer();;
+                            player.addItemToPlayer();
                             break;
                         }
                         break;
@@ -98,7 +99,7 @@ public class CollisionDetector {
 
     public void checkChickCollision(Chick chick) {
 
-        for (Collidable c : collidebels) {
+        for (Collidable c : collidables) {
 
             int col = chick.getPosition().getCol();
             int row = chick.getPosition().getRow();
@@ -109,7 +110,6 @@ public class CollisionDetector {
 
                     Player player = (Player) c;
                     int chanceToWin3 = (int) (Math.random() * 100 + (player.getItems() * 5) + player.getConfidence());
-                    System.out.println(chanceToWin3);
 
                     if (player.getItems() == 5) {
                         chickWin.play(true);
@@ -120,15 +120,13 @@ public class CollisionDetector {
                     if (player.getItems() >= 3 && player.getItems() < 5) {
                         if (chanceToWin3 > 90) {
 
-                            System.out.println(chanceToWin3);
-                            System.out.println(player.getItems() + chanceToWin3 + " " + player.getConfidence() + " vamos tentar");
                             chickWin.play(true);
                             chick.whenCollisionHappens();
                             continue;
                         }
 
                     }
-                    //if(random > 20 + player.baditem*5 + chick)
+
                     player.resetItems();
                     player.resetConfidence();
                     chickFail.play(true);
@@ -143,7 +141,7 @@ public class CollisionDetector {
 
     public void checkDancerCollision(Dancer dancer) {
 
-        for (Collidable c : collidebels) {
+        for (Collidable c : collidables) {
 
             int col = dancer.getPosition().getCol();
             int row = dancer.getPosition().getRow();
@@ -154,7 +152,7 @@ public class CollisionDetector {
 
                     Player player = (Player) c;
                     player.beingPushed(dancer.getPosition().getCurrentDirection());
-                    dancerColide.play(true);
+                    dancerCollide.play(true);
 
                 }
             }
@@ -166,27 +164,27 @@ public class CollisionDetector {
     }
 
 
-    public void CheckItemCollision(Collidable myCollideble) {
+    public void CheckItemCollision(Collidable myCollidable) {
 
-        int col = myCollideble.getPosition().getCol();
-        int row = myCollideble.getPosition().getRow();
+        int col = myCollidable.getPosition().getCol();
+        int row = myCollidable.getPosition().getRow();
 
 
-        for (Item item : myitems) {
+        for (Item item : myItems) {
 
             if (col == item.getPosition().getCol() && row == item.getPosition().getRow()) {
 
-                if (myCollideble.getType() == TypeOfGameObjects.PLAYER) {
+                if (myCollidable.getType() == TypeOfGameObjects.PLAYER) {
                     if (item.isItemStatus() == true) {
-                        beerSound.play(true);
-                        Player myplayer = (Player) myCollideble;
-                        myplayer.addItemToPlayer();
+                        itemSound.play(true);
+                        Player myPlayer = (Player) myCollidable;
+                        myPlayer.addItemToPlayer();
                         item.itemRespawn();
                         continue;
                     }
                     beerSound.play(true);
-                    Player myplayer = (Player) myCollideble;
-                    myplayer.addConfidenceToPlayer();
+                    Player myPlayer = (Player) myCollidable;
+                    myPlayer.addConfidenceToPlayer();
                     item.itemRespawn();
 
                 }

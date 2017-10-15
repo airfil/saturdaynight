@@ -1,5 +1,6 @@
 package org.academiadecodigo.enuminatti.saturdaynight;
 
+import org.academiadecodigo.enuminatti.saturdaynight.utils.Sound;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Text;
@@ -10,19 +11,20 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
  */
 public class Chick implements Collidable {
 
-    public static final TypeOfGameObjects myType = TypeOfGameObjects.CHICK;
+    //public static final TypeOfGameObjects myType = TypeOfGameObjects.CHICK;
 
     private GridPosition chickPosition;
     private Picture chickPicture;
-    private TypeOfGameObjects mytype;
+    private TypeOfGameObjects myType;
     private int moves = 0;
-    private boolean firsTime=true;
+    private boolean firsTime = true;
+    Sound chickSound = new Sound("/resources/jafaturaste.wav");
 
 
     public Chick(GridPosition chickPosition) {
 
         // Initializing this GameObject type as Chick
-        mytype = TypeOfGameObjects.CHICK;
+        myType = TypeOfGameObjects.CHICK;
 
         //Getting position in rows
         this.chickPosition = chickPosition;
@@ -40,7 +42,8 @@ public class Chick implements Collidable {
 
 
     public void move() {
-        if(firsTime){
+
+        if (firsTime) {
             accelerate();
             firsTime = false;
             return;
@@ -94,7 +97,7 @@ public class Chick implements Collidable {
         int rowDirectionMov = chickPosition.getCurrentDirection().row * Grid.CELLSIZE;
 
 
-        // Actualy moving the chick
+        // Actually moving the chick
         chickPicture.translate(colDirectionMov, rowDirectionMov);
 
 
@@ -103,8 +106,9 @@ public class Chick implements Collidable {
     //When Collision happens defines what happens
     public void whenCollisionHappens() {
 
+        chickSound.play(true);
         chickPicture.delete();
-        Picture end = new Picture(Grid.PADDING,Grid.PADDING, "resources/endScreen.png");
+        Picture end = new Picture(Grid.PADDING, Grid.PADDING, "resources/endScreen.png");
         end.draw();
         try {
             Thread.sleep(6000);
@@ -122,7 +126,7 @@ public class Chick implements Collidable {
 
     @Override
     public TypeOfGameObjects getType() {
-        return mytype;
+        return myType;
     }
 
     @Override
