@@ -26,8 +26,8 @@ public class Game {
 
     private TitleScreen menu;
 
-    Sound bailando = new Sound("/bailando2.wav");
-    Sound chickFail = new Sound("/chickFail.wav");
+    Sound bailando = new Sound("/resources/bailando2.wav");
+
     public Game() {
 
         titleScreenController();
@@ -62,7 +62,7 @@ public class Game {
         try {
             gamestart();
         } catch (InterruptedException ex) {
-            System.out.println("RODAS");
+            ex.printStackTrace();
         }
 
     }
@@ -70,8 +70,7 @@ public class Game {
     public void titleScreenController() {
         bailando.play(true);
         menu = new TitleScreen();
-        while (!menu.isInstructionsRead()){
-            System.out.println("R");
+        while (!menu.isInstructionsRead()) {
         }
         init();
 

@@ -12,10 +12,10 @@ public class CollisionDetector {
 
     private LinkedList<Collidable> collidebels;
     private LinkedList<Item> myitems;
-    Sound beerSound = new Sound("/gluglu3.wav");
-    Sound chickFail = new Sound("/chickFail.wav");
-    Sound chickWin = new Sound("/faturaste.wav");
-    Sound dancerColide = new Sound("/saidaf.wav");
+    Sound beerSound = new Sound("/resources/gluglu3.wav");
+    Sound chickFail = new Sound("/resources/chickFail.wav");
+    Sound chickWin = new Sound("/resources/faturaste.wav");
+    Sound dancerColide = new Sound("/resources/saidaf.wav");
 
 
     public CollisionDetector(LinkedList<Collidable> collidables, LinkedList<Item> myitems) {
@@ -179,14 +179,12 @@ public class CollisionDetector {
                 if (myCollideble.getType() == TypeOfGameObjects.PLAYER) {
                     if (item.isItemStatus() == true) {
                         beerSound.play(true);
-                        System.out.println("estou a interagir");
                         Player myplayer = (Player) myCollideble;
                         myplayer.addItemToPlayer();
                         item.itemRespawn();
                         continue;
                     }
                     beerSound.play(true);
-                    System.out.println("Boa cerveja");
                     Player myplayer = (Player) myCollideble;
                     myplayer.addConfidenceToPlayer();
                     item.itemRespawn();

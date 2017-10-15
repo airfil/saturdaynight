@@ -28,7 +28,7 @@ public class Dancer implements Collidable {
         int x = dancerPosition.getGameGrid().colToX(dancerPosition.getCol());
         int y = dancerPosition.getGameGrid().rowToY(dancerPosition.getRow());
 
-        dancerPicture = new Picture(x, y, "/resources/dancer.png");
+        dancerPicture = new Picture(x, y, "resources/dancer.png");
         dancerPicture.draw();
         dancerPosition.setCurrentDirection(Direction.UP);
         squaredancing = true;

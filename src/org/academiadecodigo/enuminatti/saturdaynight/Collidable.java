@@ -6,11 +6,8 @@ package org.academiadecodigo.enuminatti.saturdaynight;
 public interface Collidable {
 
 
-    public abstract GridPosition getPosition();
+    GridPosition getPosition();
 
-    public abstract TypeOfGameObjects getType();
-
-//    public abstract void whenCollisionHappens();
-
+    TypeOfGameObjects getType();
 
 }

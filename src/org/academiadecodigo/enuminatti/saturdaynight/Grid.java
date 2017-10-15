@@ -22,14 +22,12 @@ public class Grid {
 
         this.cols = cols;
         this.rows = rows;
-        this.gameGrid = new Picture(PADDING,PADDING,"/dancefloor.png");
+        this.gameGrid = new Picture(PADDING,PADDING,"resources/dancefloor.png");
         gameGrid.draw();
         HEIGHT = cols*CELLSIZE+PADDING;
         WIDTH = rows*CELLSIZE+PADDING;
 
     }
-
-
 
 
     public int getRows() {

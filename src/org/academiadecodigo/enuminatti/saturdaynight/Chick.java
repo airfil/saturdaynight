@@ -15,9 +15,7 @@ public class Chick implements Collidable {
     private GridPosition chickPosition;
     private Picture chickPicture;
     private TypeOfGameObjects mytype;
-    private Grid chickGrid;
     private int moves = 0;
-    private int beer = 0;
     private boolean firsTime=true;
 
 
@@ -34,7 +32,7 @@ public class Chick implements Collidable {
         int y = chickPosition.getGameGrid().rowToY(chickPosition.getRow());
 
         //Initializing the Chick rectangle
-        chickPicture = new Picture(x, y, "/chickPick.png");
+        chickPicture = new Picture(x, y, "resources/chickPick.png");
         chickPicture.draw();
         chickPosition.setCurrentDirection(Direction.UP);
 
@@ -106,7 +104,7 @@ public class Chick implements Collidable {
     public void whenCollisionHappens() {
 
         chickPicture.delete();
-        Picture end = new Picture(Grid.PADDING,Grid.PADDING, "/endScreen.png");
+        Picture end = new Picture(Grid.PADDING,Grid.PADDING, "resources/endScreen.png");
         end.draw();
         try {
             Thread.sleep(6000);
@@ -118,16 +116,8 @@ public class Chick implements Collidable {
 
     }
 
-    public void addItemtoChick(){
-        beer++;
-    }
-
     public GridPosition getChickPosition() {
         return chickPosition;
-    }
-
-    public int getBeer() {
-        return beer;
     }
 
     @Override
@@ -138,9 +128,5 @@ public class Chick implements Collidable {
     @Override
     public GridPosition getPosition() {
         return chickPosition;
-    }
-
-    public void setChickGrid(Grid chickGrid) {
-        this.chickGrid = chickGrid;
     }
 }

@@ -27,9 +27,9 @@ public class TitleScreen implements KeyboardHandler {
     }
 
     public void menuSlide() {
-        menuPictureOne = new Picture(Grid.PADDING, Grid.PADDING, "/resources/titleScreen1.png");
-        menuPictureTwo = new Picture(Grid.PADDING, Grid.PADDING, "/resources/titleScreen2.png");
-        instructions = new Picture(Grid.PADDING, Grid.PADDING, "/resources/instructionsScreen.png");
+        menuPictureOne = new Picture(Grid.PADDING, Grid.PADDING, "resources/titleScreen1.png");
+        menuPictureTwo = new Picture(Grid.PADDING, Grid.PADDING, "resources/titleScreen2.png");
+        instructions = new Picture(Grid.PADDING, Grid.PADDING, "resources/instructionsScreen.png");
         menuPictureTwo.draw();
         menuPictureOne.draw();
         while (!pressed) {
