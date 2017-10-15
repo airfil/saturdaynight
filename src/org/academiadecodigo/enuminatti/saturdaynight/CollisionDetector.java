@@ -111,7 +111,13 @@ public class CollisionDetector {
                     int chanceToWin3 = (int) (Math.random() * 100 + (player.getItems() * 5) + player.getConfidence());
                     System.out.println(chanceToWin3);
 
-                    if (player.getItems() == 3) {
+                    if (player.getItems() == 5) {
+                        chickWin.play(true);
+                        chick.whenCollisionHappens();
+                        continue;
+                    }
+
+                    if (player.getItems() >= 3 && player.getItems() < 5) {
                         if (chanceToWin3 > 90) {
 
                             System.out.println(chanceToWin3);
@@ -120,14 +126,7 @@ public class CollisionDetector {
                             chick.whenCollisionHappens();
                             continue;
                         }
-                        System.out.println("nao tas suficiente bebado");
-                        continue;
 
-                    }
-                    if (player.getItems() == 5) {
-                        chickWin.play(true);
-                        chick.whenCollisionHappens();
-                        continue;
                     }
                     //if(random > 20 + player.baditem*5 + chick)
                     player.resetItems();

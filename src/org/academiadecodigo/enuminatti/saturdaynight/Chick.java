@@ -18,6 +18,7 @@ public class Chick implements Collidable {
     private Grid chickGrid;
     private int moves = 0;
     private int beer = 0;
+    private boolean firsTime=true;
 
 
     public Chick(GridPosition chickPosition) {
@@ -35,13 +36,17 @@ public class Chick implements Collidable {
         //Initializing the Chick rectangle
         chickPicture = new Picture(x, y, "/chickPick.png");
         chickPicture.draw();
-        chickPosition.setCurrentDirection(Direction.RIGTH);
+        chickPosition.setCurrentDirection(Direction.UP);
 
     }
 
 
     public void move() {
-
+        if(firsTime){
+            accelerate();
+            firsTime = false;
+            return;
+        }
         int random = (int) Math.ceil(Math.random() * 100);
 
         //if the random is bigger then 95 the chick will stop moving for three iterations of the game
@@ -101,10 +106,14 @@ public class Chick implements Collidable {
     public void whenCollisionHappens() {
 
         chickPicture.delete();
-
-        Text endText = new Text(Grid.WIDTH / 2, Grid.HEIGHT / 2, "End");
-        endText.setColor(Color.RED);
-        endText.draw();
+        Picture end = new Picture(Grid.PADDING,Grid.PADDING, "/endScreen.png");
+        end.draw();
+        try {
+            Thread.sleep(6000);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+        System.exit(0);
 
 
     }

@@ -13,11 +13,12 @@ public class Game {
 
 
     public static final TypeOfGameObjects[] objectsToCreate = {TypeOfGameObjects.PLAYER, TypeOfGameObjects.PLAYER,
-            TypeOfGameObjects.CHICK, TypeOfGameObjects.DANCER, TypeOfGameObjects.DANCER, TypeOfGameObjects.DANCER};
+            TypeOfGameObjects.CHICK, TypeOfGameObjects.DANCER, TypeOfGameObjects.DANCER, TypeOfGameObjects.DANCER,
+            wwwwwwwwwwTypeOfGameObjects.DANCER, TypeOfGameObjects.DANCER, TypeOfGameObjects.DANCER};
 
     static public final long delay = 25;
     static public final int COLS = 32;
-    static public final int ROWS = 20;
+    static public final int ROWS = 18;
     private Grid gameGrid;
 
     private LinkedList<Collidable> mycollidabelObjects;
@@ -67,6 +68,7 @@ public class Game {
     }
 
     public void titleScreenController() {
+        bailando.play(true);
         menu = new TitleScreen();
         while (!menu.isPressed()){
             System.out.println("R");
@@ -79,8 +81,8 @@ public class Game {
     public void gamestart() throws InterruptedException {
         while (true) {
 
-
             for (int i = 0; i < mycollidabelObjects.size(); i++) {
+
                 switch (mycollidabelObjects.get(i).getType()) {
 
                     case CHICK:
@@ -102,7 +104,6 @@ public class Game {
                         break;
 
 
-
                 }
 
 
@@ -114,6 +115,7 @@ public class Game {
 
 
     }
+
 }
 
 

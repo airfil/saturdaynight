@@ -168,12 +168,12 @@ public class Player implements KeyboardHandler, Collidable {
        berrs = new Picture[3];
 
         for (int i = 0; i < myitems.length; i++) {
-            myitems[i] = new Picture((4+i)*Grid.CELLSIZE ,22* Grid.CELLSIZE ,"/cerveja2.png");
+            myitems[i] = new Picture((4+i)*Grid.CELLSIZE ,20* Grid.CELLSIZE ,"/item.png");
 
         }
 
         for (int j = 0; j < berrs.length ; j++) {
-            berrs[j] = new Picture((4+j)*Grid.CELLSIZE ,24* Grid.CELLSIZE ,"/cerveja2.png");
+            berrs[j] = new Picture((4+j)*Grid.CELLSIZE ,22* Grid.CELLSIZE ,"/cerveja2.png");
 
         }
     }
@@ -184,12 +184,12 @@ public class Player implements KeyboardHandler, Collidable {
         berrs = new Picture[3];
 
         for (int i = 4; i >= 0; i--) {
-            myitems[i] = new Picture((27-i)*Grid.CELLSIZE ,22* Grid.CELLSIZE ,"/cerveja2.png");
+            myitems[i] = new Picture((27-i)*Grid.CELLSIZE ,20* Grid.CELLSIZE ,"/item.png");
 
         }
 
         for (int j = 2; j >= 0 ; j--) {
-            berrs[j] = new Picture((27-j)*Grid.CELLSIZE ,24* Grid.CELLSIZE ,"/cerveja2.png");
+            berrs[j] = new Picture((27-j)*Grid.CELLSIZE ,22* Grid.CELLSIZE ,"/cerveja2.png");
 
         }
     }

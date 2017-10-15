@@ -30,7 +30,7 @@ public class Item implements Collidable {
             itemPicture.draw();
             return;
         }
-        itemPicture = new Picture(x, y, "/cerveja2.png");
+        itemPicture = new Picture(x, y, "/item.png");
         itemPicture.draw();
 
     }
@@ -46,11 +46,12 @@ public class Item implements Collidable {
         int x = itemPosition.getGameGrid().colToX(itemPosition.getCol());
         int y = itemPosition.getGameGrid().rowToY(itemPosition.getRow());
 
-        itemPicture = new Picture(x, y, "/cerveja2.png");
         if (this.itemStatus == false) {
+            itemPicture = new Picture(x, y, "/cerveja2.png");
             this.itemPicture.draw();
+            return;
         }
-
+        itemPicture = new Picture(x, y, "/item.png");
         itemPicture.draw();
 
     }
