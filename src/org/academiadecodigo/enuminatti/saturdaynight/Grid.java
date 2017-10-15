@@ -71,7 +71,5 @@ public class Grid {
         return  new GridPosition(this);
     }
 
-    public Rectangle getGameGrid() {
-        return gameGrid;
-    }
+
 }
