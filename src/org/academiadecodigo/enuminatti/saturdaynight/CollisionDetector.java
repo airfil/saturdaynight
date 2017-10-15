@@ -105,7 +105,7 @@ public class CollisionDetector {
                     System.out.println(chanceToWin3);
 
                     if (player.getItems() == 3){
-                        if(chanceToWin3 > 1){
+                        if(chanceToWin3 > 90){
 
                             System.out.println(chanceToWin3);
                             System.out.println(player.getItems()+ chanceToWin3 + " " + player.getConfidence() + " vamos tentar");
