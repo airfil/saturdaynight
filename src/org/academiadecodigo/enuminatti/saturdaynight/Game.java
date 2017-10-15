@@ -21,10 +21,12 @@ public class Game {
     private LinkedList<Collidable> mycollidabelObjects;
     private CollisionDetector myCollisionDetector;
 
+    private TitleScreen menu;
+
 
     public Game() {
 
-        init();
+        titleScreenController();
     }
 
 
@@ -53,18 +55,29 @@ public class Game {
 
         myCollisionDetector = new CollisionDetector(mycollidabelObjects,myItems);
 
+        try {
+            gamestart();
+        } catch (InterruptedException ex) {
+            System.out.println("RODAS");
+        }
 
+    }
+
+    public void titleScreenController() {
+        menu = new TitleScreen();
+        while (!menu.isPressed()){
+            System.out.println("R");
+        }
+        init();
 
     }
 
 
-    public void gameStart() throws InterruptedException {
+    public void gamestart() throws InterruptedException {
         while (true) {
 
 
             for (int i = 0; i < mycollidabelObjects.size(); i++) {
-               // System.out.println(mycollidabelObjects.get(i).getType());
-               // System.out.println(i);
                 switch (mycollidabelObjects.get(i).getType()) {
 
                     case CHICK:
