@@ -41,9 +41,9 @@ public class Game {
 
 
         LinkedList<Item> myItems = new LinkedList<Item>();
-        Item item = new Item(gameGrid.newGridPosition(7, 13), true);
-        Item beer = new Item(gameGrid.newGridPosition(10, 12), false);
-        Item beer1 = new Item((gameGrid.newGridPosition(9, 15)), false);
+        Item item = new Item(gameGrid.newGridPosition(7,13),true);
+        Item beer = new Item(gameGrid.newGridPosition(10,12),false);
+        Item beer1 = new Item((gameGrid.newGridPosition(9,15)),false);
 
 
         myItems.add(item);
@@ -51,15 +51,15 @@ public class Game {
         myItems.add(beer1);
 
 
-        for (int i = 0; i < objectsToCreate.length; i++) {
-            Collidable mygameobject = GameObjectFactory.createObjects(objectsToCreate[i], gameGrid);
+        for (int i = 0 ; i < objectsToCreate.length ; i++){
+           Collidable mygameobject =  GameObjectFactory.createObjects(objectsToCreate[i],gameGrid);
             mycollidabelObjects.add(mygameobject);
         }
 
-        myCollisionDetector = new CollisionDetector(mycollidabelObjects, myItems);
+        myCollisionDetector = new CollisionDetector(mycollidabelObjects,myItems);
 
         try {
-            gameStart();
+            gamestart();
         } catch (InterruptedException ex) {
             System.out.println("RODAS");
         }
@@ -68,7 +68,7 @@ public class Game {
 
     public void titleScreenController() {
         menu = new TitleScreen();
-        while (!menu.isPressed()) {
+        while (!menu.isPressed()){
             System.out.println("R");
         }
         init();
@@ -76,14 +76,11 @@ public class Game {
     }
 
 
-    public void gameStart() throws InterruptedException {
-        bailando.play(true);
+    public void gamestart() throws InterruptedException {
         while (true) {
 
 
             for (int i = 0; i < mycollidabelObjects.size(); i++) {
-                // System.out.println(mycollidabelObjects.get(i).getType());
-                // System.out.println(i);
                 switch (mycollidabelObjects.get(i).getType()) {
 
                     case CHICK:
@@ -93,7 +90,7 @@ public class Game {
                         break;
 
                     case PLAYER:
-                        Player myplayer = (Player) mycollidabelObjects.get(i);
+                        Player myplayer = (Player)mycollidabelObjects.get(i);
                         myplayer.accelarete();
                         myCollisionDetector.checkObjectColliding(myplayer);
                         break;
@@ -103,6 +100,7 @@ public class Game {
                         dancer.move();
                         myCollisionDetector.checkObjectColliding(dancer);
                         break;
+
 
 
                 }

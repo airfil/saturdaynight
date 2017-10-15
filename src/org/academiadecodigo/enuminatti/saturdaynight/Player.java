@@ -2,6 +2,7 @@ package org.academiadecodigo.enuminatti.saturdaynight;
 
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.graphics.Text;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
@@ -32,6 +33,8 @@ public class Player implements KeyboardHandler, Collidable {
     //Player Positon and Rectangle
     private GridPosition pos;
     private Picture playerPicture;
+    private Picture[] berrs ;
+    private Picture[] myitems ;
 
 
     //Player support proprities
@@ -56,6 +59,7 @@ public class Player implements KeyboardHandler, Collidable {
             createKeyboards(keyPlayer1);
             this.playerPicture = new Picture(x, y, "/playerOne.png");
             this.playerPicture.draw();
+            playerOneInitializingPictures();
             return;
 
         }
@@ -63,6 +67,7 @@ public class Player implements KeyboardHandler, Collidable {
         createKeyboards(keyPlayer2);
         this.playerPicture = new Picture(x, y, "/playerTwo.png");
         this.playerPicture.draw();
+        playerTwoInitializingPictures();
         return;
 
 
@@ -138,12 +143,59 @@ public class Player implements KeyboardHandler, Collidable {
     }
 
     public void addItemToPlayer() {
-        items++;
+
+        if(items < 5){
+            items++;
+            myitems[items-1].draw();
+        }
+
+
     }
     public void addConfidenceToPlayer(){
-        confidence +=5;
-        System.out.println(confidence);
+
+        if(confidence < 9){
+            confidence +=3;
+            berrs[(confidence/3)-1].draw();
+        }
+
+
+
     }
+
+    public void playerTwoInitializingPictures(){
+
+       myitems = new Picture[5];
+       berrs = new Picture[3];
+
+        for (int i = 0; i < myitems.length; i++) {
+            myitems[i] = new Picture((4+i)*Grid.CELLSIZE ,22* Grid.CELLSIZE ,"/cerveja2.png");
+
+        }
+
+        for (int j = 0; j < berrs.length ; j++) {
+            berrs[j] = new Picture((4+j)*Grid.CELLSIZE ,24* Grid.CELLSIZE ,"/cerveja2.png");
+
+        }
+    }
+
+    public void playerOneInitializingPictures(){
+
+        myitems = new Picture[5];
+        berrs = new Picture[3];
+
+        for (int i = 4; i >= 0; i--) {
+            myitems[i] = new Picture((27-i)*Grid.CELLSIZE ,22* Grid.CELLSIZE ,"/cerveja2.png");
+
+        }
+
+        for (int j = 2; j >= 0 ; j--) {
+            berrs[j] = new Picture((27-j)*Grid.CELLSIZE ,24* Grid.CELLSIZE ,"/cerveja2.png");
+
+        }
+    }
+
+
+
 
 
     @Override
@@ -156,6 +208,10 @@ public class Player implements KeyboardHandler, Collidable {
     }
     public void resetConfidence(){
         confidence = 0;
+        for (int i = 0; i < berrs.length ; i++) {
+
+            berrs[i].delete();
+        }
     }
 
     public int getItems() {
@@ -165,6 +221,10 @@ public class Player implements KeyboardHandler, Collidable {
 
     public void resetItems() {
         items = 0;
+        for (int i = 0; i < myitems.length ; i++) {
+
+            myitems[i].delete();
+        }
     }
 
     @Override

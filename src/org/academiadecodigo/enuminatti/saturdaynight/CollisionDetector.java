@@ -75,10 +75,9 @@ public class CollisionDetector {
                         break;
                     case ITEM:
                         Item item = (Item) c;
-                        if (item.isItemStatus() == true) {
+                        if(item.isItemStatus() == true) {
                             item.itemRespawn();
-                            player.addItemToPlayer();
-                            ;
+                            player.addItemToPlayer();;
                             break;
                         }
                         break;
