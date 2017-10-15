@@ -16,18 +16,20 @@ public class TitleScreen implements KeyboardHandler {
     private Picture menuPictureTwo;
     private Keyboard menuKeyboard;
     private KeyboardEvent menuKeyboardEvent;
+    private boolean instructionsRead;
     public static final int[] menuKeys = {KeyboardEvent.KEY_SPACE};
+    private Picture instructions;
 
     public TitleScreen() {
 
         createKeyboard();
         menuSlide();
-        menuPictureOne.draw();
     }
 
     public void menuSlide() {
-        menuPictureOne = new Picture (Grid.PADDING,Grid.PADDING, "/titleScreen1.png");
-        menuPictureTwo = new Picture(Grid.PADDING,Grid.PADDING, "/titleScreen2.png");
+        menuPictureOne = new Picture(Grid.PADDING, Grid.PADDING, "/resources/titleScreen1.png");
+        menuPictureTwo = new Picture(Grid.PADDING, Grid.PADDING, "/resources/titleScreen2.png");
+        instructions = new Picture(Grid.PADDING, Grid.PADDING, "/resources/instructionsScreen.png");
         menuPictureTwo.draw();
         menuPictureOne.draw();
         while (!pressed) {
@@ -41,6 +43,24 @@ public class TitleScreen implements KeyboardHandler {
                 ex.printStackTrace();
             }
         }
+        pressed = false;
+        menuPictureOne.delete();
+        menuPictureTwo.delete();
+
+        instructions.draw();
+        while (!pressed) {
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+
+        }
+        instructions.delete();
+        instructionsRead = true;
+
+
+
     }
 
     public void createKeyboard() {
@@ -55,8 +75,11 @@ public class TitleScreen implements KeyboardHandler {
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
-        System.out.println("AIRES!");
-        menuPictureOne.delete();
+        if (!instructionsRead) {
+            pressed = true;
+            return;
+        }
+
         pressed = true;
 
     }
@@ -64,11 +87,9 @@ public class TitleScreen implements KeyboardHandler {
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
 
-        menuPictureOne.delete();
-        menuPictureTwo.delete();
     }
 
-    public boolean isPressed() {
-        return pressed;
+    public boolean isInstructionsRead() {
+        return instructionsRead;
     }
 }

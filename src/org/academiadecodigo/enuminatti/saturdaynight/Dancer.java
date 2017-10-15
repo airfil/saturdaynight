@@ -15,7 +15,6 @@ public class Dancer implements Collidable {
     private int square = 1;
     private TypeOfGameObjects mytype;
     private boolean squaredancing;
-    private Grid dancerGrid;
     private GridPosition dancerPosition;
     private Picture dancerPicture;
 
@@ -29,7 +28,7 @@ public class Dancer implements Collidable {
         int x = dancerPosition.getGameGrid().colToX(dancerPosition.getCol());
         int y = dancerPosition.getGameGrid().rowToY(dancerPosition.getRow());
 
-        dancerPicture = new Picture(x, y, "/dancer.png");
+        dancerPicture = new Picture(x, y, "/resources/dancer.png");
         dancerPicture.draw();
         dancerPosition.setCurrentDirection(Direction.UP);
         squaredancing = true;
@@ -71,11 +70,6 @@ public class Dancer implements Collidable {
 
     }
 
-
-    public void setDancerGrid(Grid dancerGrid) {
-        this.dancerGrid = dancerGrid;
-    }
-
     public void accelarete() {
 
 
@@ -113,10 +107,6 @@ public class Dancer implements Collidable {
         return myType;
     }
 
-
-    public GridPosition getDancerPosition() {
-        return dancerPosition;
-    }
 
 }
 
