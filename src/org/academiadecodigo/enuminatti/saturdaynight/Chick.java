@@ -1,8 +1,8 @@
 package org.academiadecodigo.enuminatti.saturdaynight;
 
 import org.academiadecodigo.simplegraphics.graphics.Color;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Text;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 /**
  * Created by codecadet on 09/10/17.
@@ -12,7 +12,7 @@ public class Chick implements Collidable {
     public static final TypeOfGameObjects myType = TypeOfGameObjects.CHICK;
 
     private GridPosition chickPosition;
-    private Rectangle chickRectangle;
+    private Picture chickPicture;
     private TypeOfGameObjects mytype;
     private Grid chickGrid;
     private int moves = 0;
@@ -31,9 +31,8 @@ public class Chick implements Collidable {
         int y = chickPosition.getGameGrid().rowToY(chickPosition.getRow());
 
         //Initializing the Chick rectangle
-        chickRectangle = new Rectangle(x, y, Grid.CELLSIZE, Grid.CELLSIZE);
-        chickRectangle.setColor(Color.PINK);
-        chickRectangle.fill();
+        chickPicture = new Picture(x, y, "/chickPick.png");
+        chickPicture.draw();
         chickPosition.setCurrentDirection(Direction.RIGTH);
 
     }
@@ -91,7 +90,7 @@ public class Chick implements Collidable {
 
 
         // Actualy moving the chick
-        chickRectangle.translate(colDirectionMov, rowDirectionMov);
+        chickPicture.translate(colDirectionMov, rowDirectionMov);
 
 
     }
@@ -99,7 +98,7 @@ public class Chick implements Collidable {
     //When Collision happens defines what happens
     public void whenCollisionHappens() {
 
-        chickRectangle.delete();
+        chickPicture.delete();
 
         Text endText = new Text(Grid.WIDTH / 2, Grid.HEIGHT / 2, "End");
         endText.setColor(Color.RED);
