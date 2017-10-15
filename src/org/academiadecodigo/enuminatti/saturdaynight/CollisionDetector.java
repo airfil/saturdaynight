@@ -101,7 +101,7 @@ public class CollisionDetector {
                 if (c.getType() == TypeOfGameObjects.PLAYER) {
 
                     Player player = (Player) c;
-                    int chanceToWin3 = (int) (Math.random() * 100 + (player.getItems() * 5) + player.getConfidence() + chick.getBeer() * 5);
+                    int chanceToWin3 = (int) (Math.random() * 100 + (player.getItems() * 5) + player.getConfidence() + chick.getBeer() * 3);
                     System.out.println(chanceToWin3);
 
                     if (player.getItems() == 3) {
