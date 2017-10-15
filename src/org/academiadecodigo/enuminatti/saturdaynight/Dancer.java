@@ -7,13 +7,13 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 /**
  * Created by codecadet on 12/10/2017.
  */
-public class Dancer implements  Collidable{
+public class Dancer implements Collidable {
 
-    public final static TypeOfGameobjects myType = TypeOfGameobjects.DANCER;
+    public final static TypeOfGameObjects myType = TypeOfGameObjects.DANCER;
 
     private int moves = 4;
     private int square = 1;
-    private TypeOfGameobjects mytype;
+    private TypeOfGameObjects mytype;
     private boolean squaredancing;
     private Grid dancerGrid;
     private GridPosition dancerPosition;
@@ -43,7 +43,6 @@ public class Dancer implements  Collidable{
         Direction dancerdirection = dancerPosition.getCurrentDirection();
 
         if (squaredancing && moves == 0) {
-            System.out.println("Entrie");
             dancerPosition.setCurrentDirection(Direction.angleDirection(dancerdirection));
             moves = 3;
             square++;
@@ -59,7 +58,6 @@ public class Dancer implements  Collidable{
             int random = (int) Math.ceil(Math.random() * 100);
 
             if (random <= 60) {
-                System.out.println("SquareAgain");
                 moves = 4;
                 squaredancing = true;
                 square = 0;
@@ -112,7 +110,7 @@ public class Dancer implements  Collidable{
     }
 
     @Override
-    public TypeOfGameobjects getType() {
+    public TypeOfGameObjects getType() {
         return myType;
     }
 

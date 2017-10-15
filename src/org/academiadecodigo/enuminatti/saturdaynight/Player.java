@@ -7,15 +7,13 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
-import java.security.Key;
-
 /**
  * Created by codecadet on 09/10/17.
  */
 public class Player implements KeyboardHandler, Collidable {
 
     // CONSTANT the typeof this Gameobject will alwasys be a Player
-    public static final TypeOfGameobjects myType = TypeOfGameobjects.PLAYER;
+    public static final TypeOfGameObjects myType = TypeOfGameObjects.PLAYER;
 
     //Key binds for PlayerOne and PlayerTwo
     public static final int[] keyPlayer1 = {KeyboardEvent.KEY_LEFT,
@@ -38,6 +36,7 @@ public class Player implements KeyboardHandler, Collidable {
     //Player support proprities
     private int items = 0;
     private int moves = 0;
+    private int confidence = 0;
 
 
     public Player(GridPosition pos, int mycontroler) {
@@ -54,7 +53,7 @@ public class Player implements KeyboardHandler, Collidable {
         if (mycontroler == 1) {
 
             createKeyboards(keyPlayer1);
-            this.playerRectangle = new Rectangle(x, y, 15, 15);
+            this.playerRectangle = new Rectangle(x, y, 30, 30);
             this.playerRectangle.setColor(Color.BLUE);
             this.playerRectangle.fill();
             return;
@@ -62,7 +61,7 @@ public class Player implements KeyboardHandler, Collidable {
         }
 
         createKeyboards(keyPlayer2);
-        this.playerRectangle = new Rectangle(x, y, 15, 15);
+        this.playerRectangle = new Rectangle(x, y, 30, 30);
         this.playerRectangle.setColor(Color.RED);
         this.playerRectangle.fill();
 
@@ -141,11 +140,19 @@ public class Player implements KeyboardHandler, Collidable {
     public void addItemToPlayer() {
         items++;
     }
+    public void addConfidenceToPlayer(){
+        confidence +=5;
+        System.out.println(confidence);
+    }
 
 
     @Override
     public GridPosition getPosition() {
         return pos;
+    }
+
+    public int getConfidence() {
+        return confidence;
     }
 
     public int getItems() {
@@ -158,7 +165,7 @@ public class Player implements KeyboardHandler, Collidable {
     }
 
     @Override
-    public TypeOfGameobjects getType() {
+    public TypeOfGameObjects getType() {
         return myType;
     }
 
@@ -168,7 +175,7 @@ public class Player implements KeyboardHandler, Collidable {
 
         if (moves != 0) {
 
-            System.out.println("Player: " + items);
+           // System.out.println("Player: " + items);
 
             if (keyboardEvent.getKey() == KeyboardEvent.KEY_UP) {
 

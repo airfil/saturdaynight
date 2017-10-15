@@ -49,13 +49,13 @@ public class Grid {
         return  col * CELLSIZE + PADDING;
     }
 
-    public GridPosition newGridPostion(int row , int col){
+    public GridPosition newGridPosition(int row , int col){
         return  new GridPosition(col,row,this);
     }
 
 
     // Grid position used for item randomize first time it appears in the screen
-    public GridPosition newGridPostion(){
+    public GridPosition newGridPosition(){
         return  new GridPosition(this,0,25);
     }
 
